@@ -362,6 +362,19 @@ async def solve(session_or_task_id: Any, task_data: Optional[dict] = None,
     }
 
 
+class ToolLayer:
+    """Tool layer wrapper for backward compatibility."""
+    def __init__(self):
+        self.call_count = 0
+    def numeric_compute(self, expr: str, vars_: dict = None, unit: str = None):
+        self.call_count += 1
+        safe_ns = {"__builtins__": {}, "math": math, "sqrt": math.sqrt}
+        if vars_: safe_ns.update(vars_)
+        return type("ToolResult", (), {"ok": True, "value": {"value": eval(expr, safe_ns)}})()
+    def read_pdf_text(self, path: str):
+        self.call_count += 1
+        return type("ToolResult", (), {"ok": False, "error": f"PDF not found: {path}"})()
+
 class PLEHarness:
     """Wrapper class providing object-oriented access to solve."""
     def __init__(self):
