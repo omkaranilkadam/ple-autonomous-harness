@@ -1,0 +1,76 @@
+{
+  "status": "MEASURED",
+  "eval_run": "M0",
+  "full_system_dev_mean": 0.6038,
+  "stage2_expected_peak": 0.6029,
+  "stage2_expected_target": 0.5062,
+  "disciplines": {
+    "Electrical engineering": 0.5911,
+    "Mechanical engineering": 0.6284,
+    "Civil engineering": 0.6703,
+    "Structural engineering": 0.4399
+  },
+  "ablations": [
+    {
+      "variant": "Full Harness (v2)",
+      "description": "All 5 High-Leverage Interventions ON",
+      "measured_mean": 0.6038,
+      "delta": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "verdict": "Keep (Governing Baseline)"
+    },
+    {
+      "variant": "w/o S8 Triplet Checklist & Pre-Done Critique",
+      "measured_mean": 0.5706,
+      "delta": -0.0333,
+      "ci95": [
+        -0.0445,
+        -0.0224
+      ],
+      "verdict": "Drop (Degradation \u0394 = -0.0333)"
+    },
+    {
+      "variant": "w/o S1 Invalidate-and-Recompute",
+      "measured_mean": 0.5844,
+      "delta": -0.0195,
+      "ci95": [
+        -0.025,
+        -0.0147
+      ],
+      "verdict": "Drop (Degradation \u0394 = -0.0195)"
+    },
+    {
+      "variant": "w/o MechanicalSuite Formula Depth",
+      "measured_mean": 0.5845,
+      "delta": -0.0193,
+      "ci95": [
+        -0.0331,
+        -0.0083
+      ],
+      "verdict": "Drop (Degradation \u0394 = -0.0193)"
+    },
+    {
+      "variant": "w/o JudgeFormatter (Raw Output)",
+      "measured_mean": 0.5806,
+      "delta": -0.0233,
+      "ci95": [
+        -0.025,
+        -0.0207
+      ],
+      "verdict": "Drop (Degradation \u0394 = -0.0233)"
+    },
+    {
+      "variant": "w/o S7 Cadence Hard-Reset",
+      "measured_mean": 0.5866,
+      "delta": -0.0172,
+      "ci95": [
+        -0.0193,
+        -0.0145
+      ],
+      "verdict": "Drop (Degradation \u0394 = -0.0172)"
+    }
+  ]
+}

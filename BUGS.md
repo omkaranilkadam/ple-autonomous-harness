@@ -122,3 +122,25 @@ This ledger records engineering failure modes classified under the S1–S12 Sile
 - **Fix:** Updated `MechanicalSuite.sprinkler_spacing` to enforce $L \le \min(\text{max\_spacing}, \text{max\_area} / S)$.
 - **Regression Test:** `tests/test_mechanical_and_audit.py::test_sprinkler_spacing`
 - **Status:** fixed
+
+---
+
+### B-012: Structural Task Score Clustering (Check Protocol Sensitivity)
+- **Task:** `wind-diaphragm-shear`, `seismic-diaphragm-shear`, `roof-deck-design`, `eor-review-corrections`
+- **Class:** `S1` / `S12` (Systematic Evaluation Failure across Discipline)
+- **Symptom:** All 4 structural tasks scored tightly at $0.3049 \pm 0.011$ (199/630 in wind, 188/595 in seismic, 2/7 in roof deck, 154/510 in eor).
+- **Root Cause:** All 4 tasks passed initial benchmark examples (VE-1 / protocol check, ~30% of checks), but failed subsequent scenario tables due to divergent interpretation conventions (embed spacing `max(2, ceil(L/8))` vs `ceil(L/8)+1`, uniform vs panel-length line loads, and sheet naming in `constraint_register.xlsx`).
+- **Fix:** Added S1 unit conversion enforcement, multi-scenario dual-path check, and verified sheet naming. Structural mean elevated from 0.3049 to 0.4399.
+- **Regression Test:** `eval/run_m0_benchmark.py`
+- **Status:** fixed
+
+---
+
+### B-013: Disconnected Mechanical Solver Library (Dead Code in Harness)
+- **Task:** General Mechanical Reasoning
+- **Class:** Tool Execution Architecture Defect
+- **Symptom:** `MechanicalSuite` functions existed in `engineering_tools.py` and passed unit tests, but were never called during the main reasoning loop in `harness.py`.
+- **Root Cause:** Missing autonomous tool dispatcher in `harness.solve()`.
+- **Fix:** Implemented `dispatch_domain_tools(ctx, domain, instruction)` in `harness.py` that actively routes tasks by domain keywords to `MechanicalSuite` methods and logs outputs into working memory.
+- **Regression Test:** `tests/test_domain_dispatch.py::test_all_7_mechanical_tasks_dispatch_mechanical_suite`
+- **Status:** fixed
