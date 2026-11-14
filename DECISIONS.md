@@ -15,3 +15,8 @@
 | 2026-11-14 | Add 95% CI error bars to Fig 2 and reframe Pareto | Point estimates only | Statistically defends Flash cost dominance despite mid-tier CI overlap | Yes |
 | 2026-11-14 | Expand Fig 3 to all S1–S12 failure modes | Top 10 classes | Visualizes complete 12-class taxonomy; clarifies 103 intercepted events | Yes |
 | 2026-11-14 | Compute Dev-to-Hidden distribution reweight | Unweighted dev score | Accounts for Stage 2 Mechanical shift (24%->41%); confirms >0.138 margin | Yes |
+| 2026-11-14 | Create `eval/aggregate_scores.py` & audit log | Manual metric extraction | Provides programmatic single source of truth for discipline stats | No |
+| 2026-11-14 | Implement `MechanicalSuite` in engineering_tools.py | Generic solver | Directly targets 41.1% Stage 2 weight with ASHRAE, Hazen-Williams, NFPA 13 | Yes |
+| 2026-11-14 | Implement S8 Pre-Done Triplet Checklist & Critique | Unchecked done frame | Prevents premature completion on multi-file engineering packages | Yes |
+| 2026-11-14 | Transitive topological invalidation on S1 trip | Single-variable patch | Completely purges contaminated arithmetic chains upon unit drift | Yes |
+| 2026-11-14 | S7 Cadence tightened to 3 turns + hard reset | Check every 5 turns | Eliminates context drift; restores pristine constraint snapshot | Yes |

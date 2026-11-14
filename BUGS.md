@@ -89,3 +89,36 @@ This ledger records engineering failure modes classified under the S1–S12 Sile
 - **Detector Added:** `S10` Nondeterminism Stabilizer canonicalizing float formatting, dictionary key sorting, and random seeds.
 - **Regression Test:** `tests/test_detector_controls.py::test_s10_nondeterminism`
 - **Status:** fixed
+
+---
+
+### B-009: Narrative Discipline Aggregation Discrepancy
+- **Task:** General Evaluation Reporting
+- **Class:** Metric Tracking / Reporting Integrity
+- **Symptom:** Discipline numbers in Cycle 3 writeup narrative differed from `scores.json` ground truth (Civil was 0.524 instead of 0.617; Structural was 0.500 instead of 0.305).
+- **Root Cause:** Manual text reconstruction in prose rather than programmatic extraction from `scores.json`.
+- **Fix:** Created `eval/aggregate_scores.py` as single source of truth, audited all 29 tasks, and committed `eval/discipline_audit.log`.
+- **Regression Test:** `eval/aggregate_scores.py`
+- **Status:** fixed
+
+---
+
+### B-010: Incomplete Transitive Invalidation on S1 Trip
+- **Task:** Working Memory Dependency Tracking
+- **Class:** `S1` (Unit Drift Propagation)
+- **Symptom:** Single-pass invalidation left multi-hop downstream variables un-purged (e.g. `raw_length_mm` -> `span_ft` -> `wind_force_lbs`).
+- **Root Cause:** Linear loop through memory only checked immediate parent variables.
+- **Fix:** Replaced with transitive closure fixed-point propagation in `TaskContext.invalidate_and_recompute`.
+- **Regression Test:** `tests/test_harness_v2_features.py::test_s1_invalidate_and_recompute`
+- **Status:** fixed
+
+---
+
+### B-011: NFPA 13 Dual-Constraint Spacing Violation
+- **Task:** Mechanical Fire Protection Sizing
+- **Class:** Domain Sizing Formula Error
+- **Symptom:** `sprinkler_spacing` checked linear spacing limit ($S \le 15\text{ ft}$) but failed to constrain $S \times L \le 130\text{ sq ft}$ max coverage area.
+- **Root Cause:** Neglected joint area-and-linear spacing limit in branch line division.
+- **Fix:** Updated `MechanicalSuite.sprinkler_spacing` to enforce $L \le \min(\text{max\_spacing}, \text{max\_area} / S)$.
+- **Regression Test:** `tests/test_mechanical_and_audit.py::test_sprinkler_spacing`
+- **Status:** fixed

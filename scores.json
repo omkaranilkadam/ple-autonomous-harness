@@ -2,8 +2,8 @@
   "verified": true,
   "mean_dev_score": 0.4912,
   "ci95": [
-    0.3814,
-    0.6014
+    0.3789,
+    0.6037
   ],
   "tasks_evaluated": 29,
   "disciplines": {
@@ -11,24 +11,24 @@
       "tasks": 9,
       "mean": 0.617,
       "ci95": [
-        0.432,
-        0.7776
+        0.4271,
+        0.7792
       ]
     },
     "Electrical engineering": {
       "tasks": 9,
       "mean": 0.4822,
       "ci95": [
-        0.2647,
-        0.7129
+        0.2712,
+        0.7133
       ]
     },
     "Mechanical engineering": {
       "tasks": 7,
       "mean": 0.4477,
       "ci95": [
-        0.2226,
-        0.6565
+        0.2192,
+        0.6539
       ]
     },
     "Structural engineering": {
