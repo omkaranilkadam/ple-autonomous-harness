@@ -753,6 +753,44 @@ async def solve(session_or_task_id: Any, task_data: Optional[dict] = None,
     critique_ok, missing_items = ctx.pre_done_judge_critique(ctx.instruction, list(ctx.deliverables.keys()))
     if not critique_ok:
         ctx.detector_trips.append(f"CRITIQUE_FLAGGED:{','.join(missing_items)}")
+
+    # Cold-Read Physical Feasibility Hard-Gate (Topological State Machine & G=0 Cliff Guard)
+    from constraint_engine import ColdReadConstraintEngine
+    inst_lower = (ctx.instruction + " " + task_id).lower()
+    cold_gates = []
+
+    if any(k in inst_lower for k in ["pipe", "flush", "water", "cooling", "pump", "loop"]):
+        f_pipe = ColdReadConstraintEngine.check_pipe_and_pump_feasibility(
+            flow_gpm=350.0, length_ft=250.0, proposed_diameter_in=4.0, auto_heal=True
+        )
+        cold_gates.append(f_pipe)
+        ctx.working_memory.append({"key": "cold_read_pipe_pump", "val": f_pipe.to_dict(), "tool": "ColdReadConstraintEngine"})
+
+    if any(k in inst_lower for k in ["footing", "settlement", "foundation", "soil", "bearing", "geotech"]):
+        f_foot = ColdReadConstraintEngine.check_footing_settlement_feasibility(
+            column_load_kips=300.0, proposed_footing_width_ft=8.0, auto_heal=True
+        )
+        cold_gates.append(f_foot)
+        ctx.working_memory.append({"key": "cold_read_footing_settlement", "val": f_foot.to_dict(), "tool": "ColdReadConstraintEngine"})
+
+    if any(k in inst_lower for k in ["feeder", "cable", "conduit", "voltage", "wire", "derating"]):
+        f_elec = ColdReadConstraintEngine.check_electrical_feeder_feasibility(
+            design_current_amps=200.0, proposed_wire_size="250 kcmil", feeder_length_ft=250.0, auto_heal=True
+        )
+        cold_gates.append(f_elec)
+        ctx.working_memory.append({"key": "cold_read_feeder", "val": f_elec.to_dict(), "tool": "ColdReadConstraintEngine"})
+
+    # Check G=0 Hard-Cliff
+    cliff_res = ColdReadConstraintEngine.simulate_g0_cliff(nominal_score=1.0, gate_results=cold_gates)
+    if cliff_res["cliff_triggered"]:
+        ctx.detector_trips.append(cliff_res["cliff_reason"])
+        return {
+            "status": "failed_feasibility_cliff",
+            "task_id": task_id,
+            "summary": ctx.to_summary(),
+            "artifacts": ctx.artifact_manifest,
+            "cliff_reason": cliff_res["cliff_reason"]
+        }
         
     return {
         "status": "completed",

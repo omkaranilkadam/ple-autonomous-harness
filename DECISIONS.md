@@ -38,6 +38,7 @@
 | 2026-11-14 | Conduct Verifier Sensitivity Test in `eval/verifier_sensitivity.py` | Assume answer-checking | Experimentally proves 20% numerical error destroys 70% of score, proving deep physical checking | No |
 | 2026-11-14 | Add task-level pipeline integration tests (`test_physics_pipeline_integration.py`) | Formula unit tests only | Closes "formula works but pipeline is broken" gap; expands CI suite to 70 tests (0.21s) | Yes |
 | 2026-11-14 | Restore `w/o JudgeFormatter` row in ablation table | Prose-only citation | Reconciles -0.0034 prose citation with 11-row ablation ledger | Yes |
+| 2026-11-14 | Implement Cold-Read Constraint Engine (`constraint_engine.py`) with Knee detectors and G=0 hard cliff | Rely on LLM unconstrained generation | Physics-based topological gate detects laminar/turbulent and preconsolidation slope knee transitions; auto-backtracks geometry and simulates G=0 cliff | Yes |
 
 
 
