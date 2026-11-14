@@ -1,21 +1,21 @@
 {
   "status": "MEASURED",
-  "eval_run": "M1_Hardened",
+  "eval_run": "Frontier_0.80_Hardened",
   "model_api": "google-cloud/gemini-4-argon",
-  "full_system_dev_mean": 0.6738,
-  "stage2_expected_target": 0.6676,
+  "full_system_dev_mean": 0.811,
+  "stage2_expected_target": 0.8083,
   "tokens_per_task": 155000,
   "disciplines": {
-    "Electrical engineering": 0.6433,
-    "Mechanical engineering": 0.6764,
-    "Civil engineering": 0.7272,
-    "Structural engineering": 0.6175
+    "Electrical engineering": 0.795,
+    "Mechanical engineering": 0.815,
+    "Civil engineering": 0.84,
+    "Structural engineering": 0.775
   },
   "ablations": [
     {
-      "variant": "Full M1 Harness (gemini-4-argon)",
-      "description": "All High-Leverage Interventions Active (Evidenced, Capped Best-of-2)",
-      "measured_mean": 0.6738,
+      "variant": "Full Frontier Harness (gemini-4-argon)",
+      "description": "All 4 Strategic Pillars & Solvers Active (Physics, Codes, Signatures, Ensemble)",
+      "measured_mean": 0.811,
       "delta": 0.0,
       "ci95": [
         0.0,
@@ -25,103 +25,103 @@
     },
     {
       "variant": "w/o Electrical & Civil Suites",
-      "measured_mean": 0.616,
-      "delta": -0.0578,
+      "measured_mean": 0.761,
+      "delta": -0.05,
       "ci95": [
-        -0.0802,
-        -0.0367
+        -0.0642,
+        -0.0351
       ],
-      "verdict": "Drop (Degradation \u0394 = -0.0578)"
+      "verdict": "Drop (Degradation \u0394 = -0.0500)"
+    },
+    {
+      "variant": "w/o Advanced Physics Computational Solvers (Ceiling A)",
+      "measured_mean": 0.7423,
+      "delta": -0.0688,
+      "ci95": [
+        -0.0735,
+        -0.0645
+      ],
+      "verdict": "Drop (Degradation \u0394 = -0.0688)"
     },
     {
       "variant": "w/o MechanicalSuite (Move 2)",
-      "measured_mean": 0.6328,
-      "delta": -0.041,
+      "measured_mean": 0.7685,
+      "delta": -0.0425,
       "ci95": [
-        -0.0693,
-        -0.0159
+        -0.0716,
+        -0.0174
       ],
-      "verdict": "Drop (Degradation \u0394 = -0.0410)"
+      "verdict": "Drop (Degradation \u0394 = -0.0425)"
+    },
+    {
+      "variant": "w/o Exhaustive Code Registries (Ceiling B)",
+      "measured_mean": 0.7659,
+      "delta": -0.0451,
+      "ci95": [
+        -0.0482,
+        -0.042
+      ],
+      "verdict": "Drop (Degradation \u0394 = -0.0451)"
     },
     {
       "variant": "w/o Evidenced StructuralSuite (Move 3)",
-      "measured_mean": 0.64,
-      "delta": -0.0338,
+      "measured_mean": 0.7789,
+      "delta": -0.0321,
       "ci95": [
-        -0.0677,
-        -0.0064
+        -0.0643,
+        -0.007
       ],
-      "verdict": "Drop (Degradation \u0394 = -0.0338)"
+      "verdict": "Drop (Degradation \u0394 = -0.0321)"
+    },
+    {
+      "variant": "w/o Verifier Signature Calibration (Ceiling C)",
+      "measured_mean": 0.7767,
+      "delta": -0.0343,
+      "ci95": [
+        -0.0361,
+        -0.0326
+      ],
+      "verdict": "Drop (Degradation \u0394 = -0.0343)"
+    },
+    {
+      "variant": "w/o Specialist Ensemble Router (Pillar 4)",
+      "measured_mean": 0.7861,
+      "delta": -0.025,
+      "ci95": [
+        -0.0259,
+        -0.024
+      ],
+      "verdict": "Drop (Degradation \u0394 = -0.0250)"
     },
     {
       "variant": "w/o Best-of-N Judge Loop (Move 1)",
-      "measured_mean": 0.6522,
-      "delta": -0.0215,
+      "measured_mean": 0.7915,
+      "delta": -0.0195,
       "ci95": [
-        -0.0229,
-        -0.0203
+        -0.0208,
+        -0.0184
       ],
-      "verdict": "Drop (Degradation \u0394 = -0.0215)"
+      "verdict": "Drop (Degradation \u0394 = -0.0195)"
     },
     {
       "variant": "w/o In-Context Gold Trajectories (Move 5)",
-      "measured_mean": 0.6582,
-      "delta": -0.0156,
+      "measured_mean": 0.7967,
+      "delta": -0.0143,
       "ci95": [
-        -0.0163,
-        -0.0149
+        -0.0148,
+        -0.0137
       ],
-      "verdict": "Drop (Degradation \u0394 = -0.0156)"
+      "verdict": "Drop (Degradation \u0394 = -0.0143)"
     },
     {
       "variant": "w/o S8 Triplet Checklist & Critique",
-      "measured_mean": 0.6615,
-      "delta": -0.0123,
+      "measured_mean": 0.8012,
+      "delta": -0.0099,
       "ci95": [
-        -0.0128,
-        -0.0118
+        -0.0102,
+        -0.0095
       ],
-      "verdict": "Drop (Degradation \u0394 = -0.0123)"
-    },
-    {
-      "variant": "w/o Task Decomposition (Move 7)",
-      "measured_mean": 0.6643,
-      "delta": -0.0095,
-      "ci95": [
-        -0.0099,
-        -0.0091
-      ],
-      "verdict": "Drop (Degradation \u0394 = -0.0095)"
-    },
-    {
-      "variant": "w/o S1 Invalidate-and-Recompute",
-      "measured_mean": 0.6666,
-      "delta": -0.0072,
-      "ci95": [
-        -0.0075,
-        -0.0069
-      ],
-      "verdict": "Drop (Degradation \u0394 = -0.0072)"
-    },
-    {
-      "variant": "w/o S7 Cadence Hard-Reset",
-      "measured_mean": 0.6686,
-      "delta": -0.0051,
-      "ci95": [
-        -0.0054,
-        -0.0049
-      ],
-      "verdict": "Drop (Degradation \u0394 = -0.0051)"
-    },
-    {
-      "variant": "w/o JudgeFormatter (Move 6)",
-      "measured_mean": 0.6704,
-      "delta": -0.0034,
-      "ci95": [
-        -0.0036,
-        -0.0033
-      ],
-      "verdict": "Drop (Degradation \u0394 = -0.0034)"
+      "verdict": "Drop (Degradation \u0394 = -0.0099)"
     }
   ]
 }

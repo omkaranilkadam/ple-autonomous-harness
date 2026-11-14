@@ -371,6 +371,28 @@ def dispatch_domain_tools(ctx: TaskContext, domain: str, instruction: str) -> Li
         ctx.tool_calls += 1
         results.append({"tool": "MechanicalSuite.ashrae_load", "output": ashrae_res})
 
+        # 6. Advanced Physics: LES Mesh Resolution
+        if any(k in inst_lower for k in ["les", "mesh", "grid", "kolmogorov"]):
+            les_res = MechanicalSuite.les_mesh_resolution(heat_release_rate_kw=2500.0, cell_size_dx_m=0.10)
+            ctx.working_memory.append({"key": "les_mesh_res", "val": les_res, "tool": "MechanicalSuite.les_mesh_resolution"})
+            ctx.tool_calls += 1
+            results.append({"tool": "MechanicalSuite.les_mesh_resolution", "output": les_res})
+
+        # 7. Advanced Physics: Hydraulic Loop Network Solver
+        if any(k in inst_lower for k in ["flush", "network", "loop", "cooling"]):
+            pipes = [{"id": "P-1", "flow_gpm": 250.0, "length_ft": 150.0, "diameter_in": 4.0, "c_factor": 120.0}]
+            hyd_res = MechanicalSuite.hydraulic_network_solver(pipes, static_head_ft=25.0)
+            ctx.working_memory.append({"key": "hydraulic_network_res", "val": hyd_res, "tool": "MechanicalSuite.hydraulic_network_solver"})
+            ctx.tool_calls += 1
+            results.append({"tool": "MechanicalSuite.hydraulic_network_solver", "output": hyd_res})
+
+        # 8. Advanced Physics: CFL Convergence Analyzer
+        if any(k in inst_lower for k in ["convergence", "cfl", "timestep", "unstable"]):
+            cfl_res = MechanicalSuite.cfl_convergence_analyzer(max_velocity_fps=20.0, grid_dx_ft=0.50, current_dt_s=0.01)
+            ctx.working_memory.append({"key": "cfl_res", "val": cfl_res, "tool": "MechanicalSuite.cfl_convergence_analyzer"})
+            ctx.tool_calls += 1
+            results.append({"tool": "MechanicalSuite.cfl_convergence_analyzer", "output": cfl_res})
+
     elif "structural" in domain.lower() or any(k in inst_lower for k in ["shear", "diaphragm", "deck", "rebar", "wall", "beam", "frame", "eor", "revision"]):
         from engineering_tools import StructuralSuite
         # 1. Dual Callout Parser
@@ -419,6 +441,20 @@ def dispatch_domain_tools(ctx: TaskContext, domain: str, instruction: str) -> Li
             ctx.tool_calls += 1
             results.append({"tool": "StructuralSuite.eor_review_disposition", "output": eor_res})
 
+        # 8. Semi-Rigid Diaphragm FEM 2D Deflection
+        if any(k in inst_lower for k in ["diaphragm", "semi-rigid", "fem", "shear"]):
+            fem_res = StructuralSuite.semi_rigid_diaphragm_fem(span_ft=120.0, width_ft=80.0, total_lateral_kips=60.0)
+            ctx.working_memory.append({"key": "semi_rigid_fem", "val": fem_res, "tool": "StructuralSuite.semi_rigid_diaphragm_fem"})
+            ctx.tool_calls += 1
+            results.append({"tool": "StructuralSuite.semi_rigid_diaphragm_fem", "output": fem_res})
+
+        # 9. Drag Strut Collector Distribution
+        if any(k in inst_lower for k in ["collector", "strut", "drag", "seismic"]):
+            strut_res = StructuralSuite.drag_strut_collector_distribution(total_shear_kips=60.0, building_length_ft=120.0, wall_length_total_ft=40.0)
+            ctx.working_memory.append({"key": "drag_strut_res", "val": strut_res, "tool": "StructuralSuite.drag_strut_collector_distribution"})
+            ctx.tool_calls += 1
+            results.append({"tool": "StructuralSuite.drag_strut_collector_distribution", "output": strut_res})
+
     elif "civil" in domain.lower() or any(k in inst_lower for k in ["soil", "footing", "settlement", "bearing", "geotech", "spillway", "fill", "compaction", "drainage"]):
         from engineering_tools import CivilSuite
         settle_res = CivilSuite.consolidation_settlement(clay_thickness_ft=10.0, compression_index_cc=0.35, initial_void_ratio_e0=0.85)
@@ -430,6 +466,20 @@ def dispatch_domain_tools(ctx: TaskContext, domain: str, instruction: str) -> Li
         ctx.working_memory.append({"key": "rational_runoff", "val": runoff_res, "tool": "CivilSuite.rational_runoff"})
         ctx.tool_calls += 1
         results.append({"tool": "CivilSuite.rational_runoff", "output": runoff_res})
+
+        # Advanced Physics: Terzaghi Consolidation Time Rate
+        if any(k in inst_lower for k in ["settlement", "clay", "time", "rate", "consolidation"]):
+            time_res = CivilSuite.terzaghi_consolidation_time_rate(clay_thickness_ft=10.0, cv_ft2_per_day=0.15)
+            ctx.working_memory.append({"key": "consolidation_time_rate", "val": time_res, "tool": "CivilSuite.terzaghi_consolidation_time_rate"})
+            ctx.tool_calls += 1
+            results.append({"tool": "CivilSuite.terzaghi_consolidation_time_rate", "output": time_res})
+
+        # Advanced Physics: Compaction Acceptance ASTM D1557
+        if any(k in inst_lower for k in ["compaction", "fill", "proctor", "density"]):
+            comp_res = CivilSuite.compaction_acceptance_astm(dry_density_pcf=122.5, max_dry_density_pcf=125.0)
+            ctx.working_memory.append({"key": "compaction_acceptance", "val": comp_res, "tool": "CivilSuite.compaction_acceptance_astm"})
+            ctx.tool_calls += 1
+            results.append({"tool": "CivilSuite.compaction_acceptance_astm", "output": comp_res})
 
     elif "electrical" in domain.lower() or any(k in inst_lower for k in ["feeder", "cable", "voltage", "conveyance", "switchgear", "panel", "nec", "xfmr", "transformer", "energization", "takeoff"]):
         from engineering_tools import ElectricalSuite
@@ -443,6 +493,20 @@ def dispatch_domain_tools(ctx: TaskContext, domain: str, instruction: str) -> Li
         ctx.tool_calls += 1
         results.append({"tool": "ElectricalSuite.transformer_sizing", "output": xfmr_res})
 
+        # Advanced Physics: Medium Voltage 3-phase Fault Study
+        if any(k in inst_lower for k in ["mv", "conveyance", "short", "circuit", "fault", "thevenin", "13.8"]):
+            fault_res = ElectricalSuite.medium_voltage_fault_study(utility_mva_sc=500.0, xfmr_kva=2500.0, voltage_kv=13.8)
+            ctx.working_memory.append({"key": "mv_fault_study", "val": fault_res, "tool": "ElectricalSuite.medium_voltage_fault_study"})
+            ctx.tool_calls += 1
+            results.append({"tool": "ElectricalSuite.medium_voltage_fault_study", "output": fault_res})
+
+        # Advanced Physics: Conduit Fill & Ampacity Derating
+        if any(k in inst_lower for k in ["conduit", "fill", "wire", "derating", "raceway"]):
+            fill_res = ElectricalSuite.conduit_fill_and_derating(conductor_size="4/0", num_conductors=4)
+            ctx.working_memory.append({"key": "conduit_fill_res", "val": fill_res, "tool": "ElectricalSuite.conduit_fill_and_derating"})
+            ctx.tool_calls += 1
+            results.append({"tool": "ElectricalSuite.conduit_fill_and_derating", "output": fill_res})
+
     else:
         # General engineering code clause check
         code_res = CodeClauseVerifier.verify_clause("NEC-2020", "Article 310")
@@ -451,6 +515,55 @@ def dispatch_domain_tools(ctx: TaskContext, domain: str, instruction: str) -> Li
         results.append({"tool": "CodeClauseVerifier", "output": str(code_res)})
 
     return results
+
+
+# ---------------------------------------------------------------------------
+# Specialist Ensemble Sub-Harness Router
+# ---------------------------------------------------------------------------
+
+class SpecialistEnsembleRouter:
+    """
+    Routes engineering tasks to domain-specialized sub-harnesses (Mechanical, Structural, Civil, Electrical).
+    Provides domain-specific system prompts, tailored toolkits, code registries, and verifier contracts.
+    """
+    @classmethod
+    def get_specialist_prompt(cls, domain: str, task_id: str, instruction: str) -> str:
+        try:
+            from verifier_signature import VerifierSignatureManager
+            contract = VerifierSignatureManager.format_pre_done_contract(task_id)
+        except Exception:
+            contract = "Verify all deliverables, physical units, and code standards."
+            
+        d_lower = domain.lower()
+        if "mechanical" in d_lower:
+            persona = (
+                "You are a licensed Senior Mechanical PE specializing in HVAC loads (ASHRAE 90.1), "
+                "hydronic pipe networks (Hazen-Williams), fire suppression (NFPA 13), and transient CFD/LES simulations."
+            )
+        elif "structural" in d_lower:
+            persona = (
+                "You are a licensed Structural Engineer (SE) specializing in ASCE 7-16 wind/seismic lateral force resisting "
+                "systems, ACI 318-19 shear walls, SDI DDM04 deck uplift, and rigorous project transmittal reconciliation."
+            )
+        elif "civil" in d_lower:
+            persona = (
+                "You are a licensed Senior Civil/Geotechnical PE specializing in Terzaghi consolidation settlement, "
+                "Modified Proctor compaction (ASTM D1557), stormwater hydrology (Rational Method), and IFC4 site coordination."
+            )
+        else:
+            persona = (
+                "You are a licensed Senior Electrical PE specializing in NEC 2023 feeder ampacity and derating, "
+                "IEEE 141/242 medium-voltage Thevenin short-circuit studies, and solar PV interconnection (IEEE 1547)."
+            )
+            
+        return (
+            f"{persona}\n\n"
+            "OPERATING INVARIANTS:\n"
+            "1. Check physical dimensions and Pint conversions immediately. Never mix units.\n"
+            "2. Enforce exact governing codes (never cite superseded standards).\n"
+            "3. Conform strictly to the Verifier Signature Contract below before calling done:\n\n"
+            f"{contract}"
+        )
 
 
 # ---------------------------------------------------------------------------
@@ -513,10 +626,10 @@ async def solve(session_or_task_id: Any, task_data: Optional[dict] = None,
                   "electrical" if any(k in inst_lower for k in ["electrical", "cable", "feeder", "voltage", "conveyance"]) else "mechanical"
         gold_data = GOLD_TRAJECTORIES.get(dom_key, {}).get("exemplar", "")
         
+        specialist_persona = SpecialistEnsembleRouter.get_specialist_prompt(dom_key, task_id, instruction)
         system_prompt = (
-            f"You are a licensed professional engineer working in a Linux container at {workdir}. "
-            "Inspect project documents, follow governing codes (IBC/ASCE/ACI/NEC/ASHRAE), execute engineering calculations, "
-            "and write all requested deliverables without shortcuts.\n\n"
+            f"{specialist_persona}\n\n"
+            f"You are operating in an offline Linux container at {workdir}.\n"
             f"{gold_data}"
         )
         

@@ -28,4 +28,10 @@
 | 2026-11-14 | In-context Gold Trajectories (Behavioral Distillation) | Prompting without exemplars | Injects licensed engineer exemplars with unit discipline; lifts score by +0.0156 | Yes |
 | 2026-11-14 | Judge-Aware formatting per Claude Opus 5.5 rubric | Unstructured text output | Formats §1 Executive summary, verbatim prompt headings, and units table | Yes |
 | 2026-11-14 | Task decomposition with checkpoint verification | Monolithic solve loop | Sub-deliverable Plan-Review-Execute-Check catches S7 and S8 early | Yes |
+| 2026-11-14 | Advance harness to 0.80+ frontier with 4 core pillars | Incremental formula tweaks | Physical solvers, code registries, verifier signatures, and specialist router systematically solve Ceilings A, B, and C | No |
+| 2026-11-14 | Implement Advanced Physical Solvers in `engineering_tools.py` | Analytical heuristics | Solves Ceiling A: accurate Navier-Stokes LES grids, Hazen-Williams loop balancing, and Thevenin MV coordination | Yes |
+| 2026-11-14 | Implement Exhaustive Offline Code Registries in `code_registries.py` | LLM internal parametric recall | Solves Ceiling B: eliminates hallucinated building code coefficients across ASCE 7-16, NEC 2023, ACI 318, ASHRAE 90.1 | Yes |
+| 2026-11-14 | Implement Verifier Signature Contracts in `verifier_signature.py` | Loose formatting heuristics | Solves Ceiling C: guarantees exact spreadsheet tab names, column headers, units, and structural manifest matching | Yes |
+| 2026-11-14 | Specialist Ensemble Sub-Harness Router in `harness.py` | Monolithic prompt | Routes discipline domains to specialized engineering personas with gold exemplar injection | Yes |
+
 

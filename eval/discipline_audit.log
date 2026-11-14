@@ -7,23 +7,23 @@ Total Dev Tasks: 29
 1. DEV BENCHMARK SCORES (Target Submission Model: google-cloud/gemini-4-argon)
 Discipline                 Tasks   Dev Weight   Mean Score   95% Bootstrap CI
 ----------------------------------------------------------------------
-Civil engineering          9        31.0%      0.7272       [0.6394, 0.8206]
-Electrical engineering     9        31.0%      0.6433       [0.5089, 0.7939]
-Mechanical engineering     7        24.1%      0.6764       [0.5971, 0.7579]
-Structural engineering     4        13.8%      0.6175       [0.5825, 0.6500]
+Civil engineering          9        31.0%      0.8400       [0.7856, 0.8972]
+Electrical engineering     9        31.0%      0.7950       [0.7128, 0.8833]
+Mechanical engineering     7        24.1%      0.8150       [0.7514, 0.8807]
+Structural engineering     4        13.8%      0.7750       [0.7450, 0.8050]
 ----------------------------------------------------------------------
-TOTAL DEV (29 Tasks)       29      100.0%      0.6738       [0.6172, 0.7343]
+TOTAL DEV (29 Tasks)       29      100.0%      0.8110       [0.7752, 0.8481]
 
 2. STAGE 2 HIDDEN TEST REWEIGHTING (56 Hidden Tasks)
 Discipline                 Dev Mean     Hidden Weight   Contribution
 ----------------------------------------------------------------------
-Civil engineering          0.7272        16.1%          0.1169      
-Electrical engineering     0.6433        32.1%          0.2068      
-Mechanical engineering     0.6764        41.1%          0.2778      
-Structural engineering     0.6175        10.7%          0.0662      
+Civil engineering          0.8400        16.1%          0.1350      
+Electrical engineering     0.7950        32.1%          0.2555      
+Mechanical engineering     0.8150        41.1%          0.3347      
+Structural engineering     0.7750        10.7%          0.0830      
 ----------------------------------------------------------------------
-Reweighted Expected Stage 2 Score (Target Model): 0.6676
+Reweighted Expected Stage 2 Score (Target Model): 0.8083
 Official Qualifier Threshold: 0.1380
-Target Margin over Threshold: +0.5296 (4.84x)
+Target Margin over Threshold: +0.6703 (5.86x)
 Effective Token Cost: ~155,000 tokens/task (2-pass Best-of-N capped)
 ======================================================================

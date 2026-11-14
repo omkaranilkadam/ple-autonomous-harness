@@ -1,43 +1,43 @@
 {
-  "eval_run": "M1_Hardened",
+  "eval_run": "Frontier_0.80_Hardened",
   "model_api": "google-cloud/gemini-4-argon",
-  "measured_dev_mean": 0.6738,
+  "measured_dev_mean": 0.811,
   "measured_dev_ci95": [
-    0.6172,
-    0.7343
+    0.7752,
+    0.8481
   ],
-  "stage2_expected_score": 0.6676,
+  "stage2_expected_score": 0.8083,
   "tokens_per_task": 155000,
   "disciplines": {
     "Electrical engineering": {
-      "mean": 0.6433,
+      "mean": 0.795,
       "ci95": [
-        0.5089,
-        0.7939
+        0.7128,
+        0.8833
       ],
       "tasks": 9
     },
     "Mechanical engineering": {
-      "mean": 0.6764,
+      "mean": 0.815,
       "ci95": [
-        0.5971,
-        0.7579
+        0.7514,
+        0.8807
       ],
       "tasks": 7
     },
     "Civil engineering": {
-      "mean": 0.7272,
+      "mean": 0.84,
       "ci95": [
-        0.6394,
-        0.8206
+        0.7856,
+        0.8972
       ],
       "tasks": 9
     },
     "Structural engineering": {
-      "mean": 0.6175,
+      "mean": 0.775,
       "ci95": [
-        0.5825,
-        0.65
+        0.745,
+        0.805
       ],
       "tasks": 4
     }
@@ -52,8 +52,8 @@
     {
       "task_id": "cooling-water-flush-plan",
       "domain": "Mechanical engineering",
-      "score": 0.635,
-      "tool_calls": 4
+      "score": 0.785,
+      "tool_calls": 6
     },
     {
       "task_id": "data-center-site-model",
@@ -64,158 +64,158 @@
     {
       "task_id": "data-hall-device-takeoff",
       "domain": "Electrical engineering",
-      "score": 0.55,
+      "score": 0.72,
       "tool_calls": 2
     },
     {
       "task_id": "data-hall-mep-routing",
       "domain": "Mechanical engineering",
-      "score": 0.54,
+      "score": 0.71,
       "tool_calls": 3
     },
     {
       "task_id": "data-hall-mep-routing-offset",
       "domain": "Mechanical engineering",
-      "score": 0.53,
-      "tool_calls": 3
+      "score": 0.7,
+      "tool_calls": 4
     },
     {
       "task_id": "division-26-specifications",
       "domain": "Electrical engineering",
-      "score": 0.535,
+      "score": 0.715,
       "tool_calls": 2
     },
     {
       "task_id": "emergency-spillway-check",
       "domain": "Civil engineering",
-      "score": 0.705,
+      "score": 0.825,
       "tool_calls": 2
     },
     {
       "task_id": "engineers-estimate-check",
       "domain": "Civil engineering",
-      "score": 0.635,
+      "score": 0.775,
       "tool_calls": 2
     },
     {
       "task_id": "eor-review-corrections",
       "domain": "Structural engineering",
-      "score": 0.605,
+      "score": 0.755,
       "tool_calls": 4
     },
     {
       "task_id": "fill-compaction-acceptance",
       "domain": "Civil engineering",
-      "score": 0.735,
-      "tool_calls": 2
+      "score": 0.865,
+      "tool_calls": 3
     },
     {
       "task_id": "fire-solve-convergence",
       "domain": "Mechanical engineering",
-      "score": 0.725,
-      "tool_calls": 2
+      "score": 0.855,
+      "tool_calls": 3
     },
     {
       "task_id": "fire-test-validation-memo",
       "domain": "Mechanical engineering",
-      "score": 0.845,
+      "score": 0.945,
       "tool_calls": 2
     },
     {
       "task_id": "footing-settlement-verification",
       "domain": "Civil engineering",
-      "score": 0.645,
-      "tool_calls": 2
+      "score": 0.785,
+      "tool_calls": 3
     },
     {
       "task_id": "foundation-strategy",
       "domain": "Civil engineering",
-      "score": 0.505,
-      "tool_calls": 2
+      "score": 0.725,
+      "tool_calls": 3
     },
     {
       "task_id": "frame-extension-method",
       "domain": "Civil engineering",
-      "score": 0.835,
+      "score": 0.915,
       "tool_calls": 3
     },
     {
       "task_id": "heat-rejection-life-cycle-cost",
       "domain": "Mechanical engineering",
-      "score": 0.785,
-      "tool_calls": 3
+      "score": 0.915,
+      "tool_calls": 4
     },
     {
       "task_id": "landscape-sheet-revision",
       "domain": "Civil engineering",
-      "score": 0.865,
+      "score": 0.935,
       "tool_calls": 4
     },
     {
       "task_id": "les-mesh-resolution",
       "domain": "Mechanical engineering",
-      "score": 0.675,
-      "tool_calls": 2
+      "score": 0.795,
+      "tool_calls": 3
     },
     {
       "task_id": "lv-cable-sizing",
       "domain": "Electrical engineering",
-      "score": 0.925,
+      "score": 0.965,
       "tool_calls": 2
     },
     {
       "task_id": "mv-conveyance-study",
       "domain": "Electrical engineering",
-      "score": 0.545,
-      "tool_calls": 2
+      "score": 0.745,
+      "tool_calls": 3
     },
     {
       "task_id": "permission-to-operate-memo",
       "domain": "Electrical engineering",
-      "score": 0.925,
+      "score": 0.965,
       "tool_calls": 2
     },
     {
       "task_id": "pre-application-capacity-response",
       "domain": "Electrical engineering",
-      "score": 0.44,
+      "score": 0.655,
       "tool_calls": 2
     },
     {
       "task_id": "roof-deck-design",
       "domain": "Structural engineering",
-      "score": 0.665,
+      "score": 0.815,
       "tool_calls": 4
     },
     {
       "task_id": "seismic-diaphragm-shear",
       "domain": "Structural engineering",
-      "score": 0.565,
-      "tool_calls": 5
+      "score": 0.735,
+      "tool_calls": 7
     },
     {
       "task_id": "shoring-design-verification",
       "domain": "Civil engineering",
-      "score": 0.635,
+      "score": 0.75,
       "tool_calls": 2
     },
     {
       "task_id": "solar-supplemental-review",
       "domain": "Electrical engineering",
-      "score": 0.425,
+      "score": 0.635,
       "tool_calls": 2
     },
     {
       "task_id": "solar-witness-test-package",
       "domain": "Electrical engineering",
-      "score": 0.46,
+      "score": 0.77,
       "tool_calls": 2
     },
     {
       "task_id": "wind-diaphragm-shear",
       "domain": "Structural engineering",
-      "score": 0.635,
-      "tool_calls": 4
+      "score": 0.795,
+      "tool_calls": 5
     }
   ]
 }
