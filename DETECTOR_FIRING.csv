@@ -1,0 +1,13 @@
+detector,task,real_trips,injected_trips,false_positives,status
+S1,wind-diaphragm-shear,0,1,0,PASS
+S2,wind-diaphragm-shear,0,1,0,PASS
+S3,wind-diaphragm-shear,0,1,0,PASS
+S4,data-center-site-model,0,1,0,PASS
+S5,data-hall-mep-routing,0,2,0,PASS
+S6,cooling-water-flush-plan,0,2,0,PASS
+S7,division-26-specifications,0,1,0,PASS
+S8,wind-diaphragm-shear,0,1,0,PASS
+S9,heat-rejection-life-cycle-cost,0,1,0,PASS
+S10,fire-solve-convergence,0,1,0,PASS
+S11,mv-conveyance-study,0,1,0,PASS
+S12,wind-diaphragm-shear,0,1,0,PASS

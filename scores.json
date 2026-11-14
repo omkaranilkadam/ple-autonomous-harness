@@ -1,0 +1,248 @@
+{
+  "verified": true,
+  "mean_dev_score": 0.4912,
+  "ci95": [
+    0.3814,
+    0.6014
+  ],
+  "tasks_evaluated": 29,
+  "disciplines": {
+    "Civil engineering": {
+      "tasks": 9,
+      "mean": 0.617,
+      "ci95": [
+        0.432,
+        0.7776
+      ]
+    },
+    "Electrical engineering": {
+      "tasks": 9,
+      "mean": 0.4822,
+      "ci95": [
+        0.2647,
+        0.7129
+      ]
+    },
+    "Mechanical engineering": {
+      "tasks": 7,
+      "mean": 0.4477,
+      "ci95": [
+        0.2226,
+        0.6565
+      ]
+    },
+    "Structural engineering": {
+      "tasks": 4,
+      "mean": 0.3049,
+      "ci95": [
+        0.2933,
+        0.3159
+      ]
+    }
+  },
+  "tasks": [
+    {
+      "task_id": "backfeed-energization-reply",
+      "domain": "Electrical engineering",
+      "score": 1.0,
+      "status": "completed",
+      "provenance": "G1-G6_PASS"
+    },
+    {
+      "task_id": "cooling-water-flush-plan",
+      "domain": "Mechanical engineering",
+      "score": 0.461348,
+      "status": "completed",
+      "provenance": "G1-G6_PASS"
+    },
+    {
+      "task_id": "data-center-site-model",
+      "domain": "Civil engineering",
+      "score": 1.0,
+      "status": "completed",
+      "provenance": "G1-G6_PASS"
+    },
+    {
+      "task_id": "data-hall-device-takeoff",
+      "domain": "Electrical engineering",
+      "score": 0.382609,
+      "status": "completed",
+      "provenance": "G1-G6_PASS"
+    },
+    {
+      "task_id": "data-hall-mep-routing",
+      "domain": "Mechanical engineering",
+      "score": 0.0,
+      "status": "completed",
+      "provenance": "G1-G6_PASS"
+    },
+    {
+      "task_id": "data-hall-mep-routing-offset",
+      "domain": "Mechanical engineering",
+      "score": 0.0,
+      "status": "completed",
+      "provenance": "G1-G6_PASS"
+    },
+    {
+      "task_id": "division-26-specifications",
+      "domain": "Electrical engineering",
+      "score": 0.34937,
+      "status": "completed",
+      "provenance": "G1-G6_PASS"
+    },
+    {
+      "task_id": "emergency-spillway-check",
+      "domain": "Civil engineering",
+      "score": 0.621622,
+      "status": "completed",
+      "provenance": "G1-G6_PASS"
+    },
+    {
+      "task_id": "engineers-estimate-check",
+      "domain": "Civil engineering",
+      "score": 0.543478,
+      "status": "completed",
+      "provenance": "G1-G6_PASS"
+    },
+    {
+      "task_id": "eor-review-corrections",
+      "domain": "Structural engineering",
+      "score": 0.301961,
+      "status": "completed",
+      "provenance": "G1-G6_PASS"
+    },
+    {
+      "task_id": "fill-compaction-acceptance",
+      "domain": "Civil engineering",
+      "score": 0.675926,
+      "status": "completed",
+      "provenance": "G1-G6_PASS"
+    },
+    {
+      "task_id": "fire-solve-convergence",
+      "domain": "Mechanical engineering",
+      "score": 0.635659,
+      "status": "completed",
+      "provenance": "G1-G6_PASS"
+    },
+    {
+      "task_id": "fire-test-validation-memo",
+      "domain": "Mechanical engineering",
+      "score": 0.807692,
+      "status": "completed",
+      "provenance": "G1-G6_PASS"
+    },
+    {
+      "task_id": "footing-settlement-verification",
+      "domain": "Civil engineering",
+      "score": 0.532258,
+      "status": "completed",
+      "provenance": "G1-G6_PASS"
+    },
+    {
+      "task_id": "foundation-strategy",
+      "domain": "Civil engineering",
+      "score": 0.0,
+      "status": "completed",
+      "provenance": "G1-G6_PASS"
+    },
+    {
+      "task_id": "frame-extension-method",
+      "domain": "Civil engineering",
+      "score": 0.8063,
+      "status": "completed",
+      "provenance": "G1-G6_PASS"
+    },
+    {
+      "task_id": "heat-rejection-life-cycle-cost",
+      "domain": "Mechanical engineering",
+      "score": 0.692462,
+      "status": "completed",
+      "provenance": "G1-G6_PASS"
+    },
+    {
+      "task_id": "landscape-sheet-revision",
+      "domain": "Civil engineering",
+      "score": 0.857143,
+      "status": "completed",
+      "provenance": "G1-G6_PASS"
+    },
+    {
+      "task_id": "les-mesh-resolution",
+      "domain": "Mechanical engineering",
+      "score": 0.536585,
+      "status": "completed",
+      "provenance": "G1-G6_PASS"
+    },
+    {
+      "task_id": "lv-cable-sizing",
+      "domain": "Electrical engineering",
+      "score": 0.906575,
+      "status": "completed",
+      "provenance": "G1-G6_PASS"
+    },
+    {
+      "task_id": "mv-conveyance-study",
+      "domain": "Electrical engineering",
+      "score": 0.353437,
+      "status": "completed",
+      "provenance": "G1-G6_PASS"
+    },
+    {
+      "task_id": "permission-to-operate-memo",
+      "domain": "Electrical engineering",
+      "score": 0.909091,
+      "status": "completed",
+      "provenance": "G1-G6_PASS"
+    },
+    {
+      "task_id": "pre-application-capacity-response",
+      "domain": "Electrical engineering",
+      "score": 0.230769,
+      "status": "completed",
+      "provenance": "G1-G6_PASS"
+    },
+    {
+      "task_id": "roof-deck-design",
+      "domain": "Structural engineering",
+      "score": 0.285714,
+      "status": "completed",
+      "provenance": "G1-G6_PASS"
+    },
+    {
+      "task_id": "seismic-diaphragm-shear",
+      "domain": "Structural engineering",
+      "score": 0.315966,
+      "status": "completed",
+      "provenance": "G1-G6_PASS"
+    },
+    {
+      "task_id": "shoring-design-verification",
+      "domain": "Civil engineering",
+      "score": 0.516393,
+      "status": "completed",
+      "provenance": "G1-G6_PASS"
+    },
+    {
+      "task_id": "solar-supplemental-review",
+      "domain": "Electrical engineering",
+      "score": 0.207792,
+      "status": "completed",
+      "provenance": "G1-G6_PASS"
+    },
+    {
+      "task_id": "solar-witness-test-package",
+      "domain": "Electrical engineering",
+      "score": 0.0,
+      "status": "completed",
+      "provenance": "G1-G6_PASS"
+    },
+    {
+      "task_id": "wind-diaphragm-shear",
+      "domain": "Structural engineering",
+      "score": 0.315873,
+      "status": "completed",
+      "provenance": "G1-G6_PASS"
+    }
+  ]
+}
