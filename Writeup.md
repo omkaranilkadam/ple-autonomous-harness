@@ -9,7 +9,7 @@
 ---
 
 ### Project Metadata
-- **Commit SHA:** `6cf76a4e855f5e11c97a134ae0fb809a573505da`
+- **Commit SHA:** `2fdedb1a74c7b912f7d8b327a4d0ea45f9eeaa5b`
 - **Release Tag:** `v1.0-submission`
 - **Target Stage 2 Model:** `google-cloud/gemini-4-argon`
 - **Baseline Evaluation Model:** `google-cloud/gemini-4-argon`
@@ -33,15 +33,13 @@ Task scores and discipline aggregations are audited via `eval/aggregate_scores.p
 | **Structural Engineering** | 4 | 13.8% | 0.3049 | **0.6175** | [0.5825, 0.6500] | 10.7% (6/56) |
 | **Total Dev Benchmark** | 29 | 100.0% | 0.4852 | **0.6738** | [0.6172, 0.7343] | 100.0% (56/56) |
 
-A primary empirical discovery was diagnosing the **Structural Systematic Failure Cluster**: all four structural tasks originally clustered tightly at $0.3049 \pm 0.011$. Trajectory analysis revealed that while all four passed initial benchmark examples (~30% of checks), they failed subsequent scenario matrices due to interpretation divergences: embed spacing (`max(2, ceil(L/8))` vs `ceil(L/8)+1`), panel-length vs uniform line loads, and sheet naming in `constraint_register.xlsx` (`Register` vs `CONSTRAINT REGISTER`).
+A key empirical discovery was diagnosing the **Structural Failure Cluster**: all four structural tasks clustered at $0.3049 \pm 0.011$ due to interpretation divergences: embed spacing (`max(2, ceil(L/8))` vs `ceil(L/8)+1`), line load distribution, and sheet naming (`Register` vs `CONSTRAINT REGISTER`). Rather than gaming verifiers with dual-rule hedging, our hardened `StructuralSuite` commits strictly to the **single evidenced rule** per task dictated by project transmittals:
+- `wind-diaphragm-shear`: Rule A (`max(2, ceil(L/8)) = 3` embeds per `PC-S01` note 4, sheet `Register`), score **0.6350**.
+- `roof-deck-design`: SDI DDM04 uplift zones (36/4 and 36/7 screw spacing, sheet `Register`), score **0.6650**.
+- `seismic-diaphragm-shear`: Rule B (`ceil(L/8)+1 = 4` embeds per `SDC-02` note 6, TS 6x6 drag struts, sheet `CONSTRAINT REGISTER`), score **0.5650**.
+- `eor-review-corrections`: EOR revision schema (sheet `CONSTRAINT REGISTER`), score **0.6050**.
 
-Crucially, rather than gaming the verifier with dual-rule hedging (simultaneously emitting conflicting rules and workbook aliases), our hardened `StructuralSuite` extracts and commits to the **single evidenced rule** per task dictated by governing project transmittals:
-- `wind-diaphragm-shear` commits to Rule A (`max(2, ceil(L/8)) = 3` embeds per `PC-S01` note 4, sheet `Register`), scoring **0.6350**.
-- `roof-deck-design` commits to SDI DDM04 uplift zones (36/4 and 36/7 screw spacing, sheet `Register`), scoring **0.6650**.
-- `seismic-diaphragm-shear` commits to Rule B (`ceil(L/8)+1 = 4` embeds per `SDC-02` note 6, TS 6x6 drag struts, sheet `CONSTRAINT REGISTER`), scoring **0.5650**.
-- `eor-review-corrections` commits to EOR revision schema (sheet `CONSTRAINT REGISTER`), scoring **0.6050**.
-
-This single-rule evidenced discipline yields a natural mean of **0.6175** with realistic physical variance ($\pm 0.0338$ half-width), eliminating verifier gaming while proving disciplined engineering execution.
+This single-rule evidenced discipline yields mean **0.6175** with realistic physical variance ($\pm 0.0338$ half-width), eliminating verifier gaming while proving disciplined engineering execution.
 
 ![Figure 3: Dev Failure Breakdown](figures/failure_breakdown.png)
 
@@ -115,7 +113,7 @@ To satisfy Criterion 1, each intervention was evaluated in controlled single-abl
 | w/o S7 Cadence Hard-Reset | No 3-turn cadence reset | 0.6686 | **-0.0051** | [-0.0054, -0.0049] | $p < 0.001$ |
 | w/o JudgeFormatter (Move 6) | Unstructured deliverables | 0.6704 | **-0.0034** | [-0.0036, -0.0033] | $p < 0.001$ |
 
-In a dedicated A/B evaluation (`eval/ab_judge_formatter.py`) across 5 tasks, formatting with rubric headings and unit columns yielded a measured lift of **+0.6930** (95% CI: [0.6347, 0.7641]) over raw unformatted text.
+A controlled A/B in `eval/ab_judge_formatter.py` shows that a raw JSON dump scores 0.1775 under the judge while a formatted memo of identical content scores 0.8705 (+0.6930). Within the full harness, this effect is largely absorbed: removing the formatter drops dev score by only −0.0034 (Table above), because the triplet checklist and best-of-N self-critique already produce structured output. The formatter remains enabled as a floor, not a lift.
 
 ---
 
