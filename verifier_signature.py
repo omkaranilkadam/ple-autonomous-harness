@@ -279,8 +279,79 @@ TASK_SIGNATURES: Dict[str, Dict[str, Any]] = {
     }
 }
 
+# Common sheet name alias families for Stage-2 generalization
+SHEET_NAME_ALIASES: Dict[str, List[str]] = {
+    "Register": ["Register", "CONSTRAINT REGISTER", "Constraint Register", "Constraints", "Sheet1", "REG", "REG_SHEET", "Constraint_Register"],
+    "CONSTRAINT REGISTER": ["CONSTRAINT REGISTER", "Constraint Register", "Register", "Constraints", "Sheet1", "REG", "Constraint_Register"],
+    "Lateral Schedule": ["Lateral Schedule", "Schedule", "Lateral", "Lateral_Schedule", "Sheet1"],
+    "Deck Schedule": ["Deck Schedule", "Deck Selection", "Deck", "Sheet1"],
+    "Seismic Summary": ["Seismic Summary", "Seismic", "Summary", "Sheet1"],
+    "Revision Log": ["Revision Log", "Revisions", "Log", "Comments", "Sheet1"],
+    "Hydraulics": ["Hydraulics", "Hydraulic Takeoff", "Flow", "Sheet1"],
+    "Summary": ["Summary", "Executive Summary", "Overview", "General", "Sheet1"],
+    "Calculations": ["Calculations", "Calcs", "Design Calculations", "Sheet1"],
+    "Settlement Analysis": ["Settlement Analysis", "Settlement", "Geotechnical", "Sheet1"],
+    "Feeder Sizing": ["Feeder Sizing", "Feeders", "Conductors", "Cable Sizing", "Sheet1"],
+    "Load Flow": ["Load Flow", "Loads", "Power Flow", "Sheet1"],
+}
+
 class VerifierSignatureManager:
     """Manages exact schema verification and output templating across all 29 dev tasks."""
+
+    @classmethod
+    def get_resilient_sheet_aliases(cls, target_sheet: str) -> List[str]:
+        """Returns ordered list of fallback alias names for target_sheet."""
+        target_norm = target_sheet.strip().lower()
+        for canonical, aliases in SHEET_NAME_ALIASES.items():
+            if canonical.strip().lower() == target_norm:
+                return aliases
+        return [target_sheet, target_sheet.replace(" ", "_"), target_sheet.replace("_", " "), "Sheet1", "Summary"]
+
+    @classmethod
+    def resolve_resilient_sheet_name(cls, target_sheet: str, existing_sheets: List[str]) -> Optional[str]:
+        """
+        Resolves an existing sheet name to target_sheet using exact match,
+        case-insensitive match, canonical aliases, and fuzzy token overlap match.
+        """
+        if not existing_sheets:
+            return None
+        if target_sheet in existing_sheets:
+            return target_sheet
+        target_lower = target_sheet.strip().lower()
+        for s in existing_sheets:
+            if s.strip().lower() == target_lower:
+                return s
+        aliases = cls.get_resilient_sheet_aliases(target_sheet)
+        alias_lowers = [a.strip().lower() for a in aliases]
+        for s in existing_sheets:
+            if s.strip().lower() in alias_lowers:
+                return s
+        target_tokens = set(target_lower.split())
+        for s in existing_sheets:
+            s_tokens = set(s.strip().lower().split())
+            if target_tokens and target_tokens.issubset(s_tokens):
+                return s
+        return None
+
+    @classmethod
+    def resolve_resilient_header(cls, target_header: str, existing_headers: List[str]) -> Optional[str]:
+        """
+        Resolves column header using normalization (ignoring case, underscores, spaces, dashes).
+        """
+        if not existing_headers:
+            return None
+        if target_header in existing_headers:
+            return target_header
+        def norm(h: str) -> str:
+            return h.lower().replace("_", "").replace("-", "").replace(" ", "").replace(".", "")
+        t_norm = norm(target_header)
+        for h in existing_headers:
+            if norm(h) == t_norm:
+                return h
+        for h in existing_headers:
+            if t_norm in norm(h) or norm(h) in t_norm:
+                return h
+        return None
 
     @classmethod
     def get_signature(cls, task_id: str) -> Dict[str, Any]:
