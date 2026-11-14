@@ -12,4 +12,5 @@ build/
 !eval/discipline_audit.log
 .DS_Store
 Thumbs.db
+uv.lock
 

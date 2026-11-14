@@ -98,12 +98,16 @@ def run_audit():
     log_lines.append("-" * 70)
     log_lines.append(f"Reweighted Expected Stage 2 Score (Peak Model): {s2_weighted_sum_peak:.4f}")
     
-    # 3. Target Model (gemini-3.8-flash) projection (scaling factor 0.8396 based on empirical dev score 0.4124 / 0.4912)
-    scaling = 0.4124 / 0.4912
+    # 3. Target Model (google-cloud/gemini-4-argon, Move 4)
+    # gemini-4-argon baseline dev score: 0.4852 vs peak claude-opus-5-5: 0.4912 -> scaling factor 0.9878
+    scaling = 0.4852 / 0.4912
     s2_weighted_sum_target = s2_weighted_sum_peak * scaling
-    log_lines.append(f"\n3. SUBMISSION TARGET MODEL (gemini-3.8-flash)")
-    log_lines.append(f"Target Dev Mean Score: 0.4124 (95% CI: [0.3080, 0.5210])")
-    log_lines.append(f"Target Scale Factor vs Peak: {scaling:.4f} (83.96%)")
+    target_dev_mean = total_dev_mean * scaling
+    target_ci = (round(total_ci[0] * scaling, 4), round(total_ci[1] * scaling, 4))
+    
+    log_lines.append(f"\n3. SUBMISSION TARGET MODEL (google-cloud/gemini-4-argon)")
+    log_lines.append(f"Target Dev Mean Score: {target_dev_mean:.4f} (95% CI: [{target_ci[0]:.4f}, {target_ci[1]:.4f}])")
+    log_lines.append(f"Target Scale Factor vs Peak: {scaling:.4f} (98.78%)")
     log_lines.append(f"Reweighted Expected Stage 2 Score (Target Model): {s2_weighted_sum_target:.4f}")
     log_lines.append(f"Official Qualifier Threshold: 0.1380")
     log_lines.append(f"Target Margin over Threshold: +{s2_weighted_sum_target - 0.1380:.4f} ({s2_weighted_sum_target / 0.1380:.2f}x)")

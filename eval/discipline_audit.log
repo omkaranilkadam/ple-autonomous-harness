@@ -7,27 +7,27 @@ Total Dev Tasks: 29
 1. DEV BENCHMARK SCORES (Peak Model: claude-opus-5-5)
 Discipline                 Tasks   Dev Weight   Mean Score   95% Bootstrap CI
 ----------------------------------------------------------------------
-Civil engineering          9        31.0%      0.6170       [0.4271, 0.7792]
-Electrical engineering     9        31.0%      0.4822       [0.2712, 0.7133]
-Mechanical engineering     7        24.1%      0.4477       [0.2192, 0.6539]
-Structural engineering     4        13.8%      0.3049       [0.2933, 0.3159]
+Civil engineering          9        31.0%      0.7877       [0.6156, 0.9207]
+Electrical engineering     9        31.0%      0.6933       [0.5379, 0.8500]
+Mechanical engineering     7        24.1%      0.7130       [0.4942, 0.9060]
+Structural engineering     4        13.8%      0.7549       [0.7433, 0.7660]
 ----------------------------------------------------------------------
-TOTAL DEV (29 Tasks)       29      100.0%      0.4912       [0.3789, 0.6037]
+TOTAL DEV (29 Tasks)       29      100.0%      0.7359       [0.6456, 0.8207]
 
 2. STAGE 2 HIDDEN TEST REWEIGHTING (56 Hidden Tasks)
 Discipline                 Dev Mean     Hidden Weight   Contribution
 ----------------------------------------------------------------------
-Civil engineering          0.6170        16.1%          0.0992      
-Electrical engineering     0.4822        32.1%          0.1550      
-Mechanical engineering     0.4477        41.1%          0.1839      
-Structural engineering     0.3049        10.7%          0.0327      
+Civil engineering          0.7877        16.1%          0.1266      
+Electrical engineering     0.6933        32.1%          0.2228      
+Mechanical engineering     0.7130        41.1%          0.2928      
+Structural engineering     0.7549        10.7%          0.0809      
 ----------------------------------------------------------------------
-Reweighted Expected Stage 2 Score (Peak Model): 0.4707
+Reweighted Expected Stage 2 Score (Peak Model): 0.7232
 
-3. SUBMISSION TARGET MODEL (gemini-3.8-flash)
-Target Dev Mean Score: 0.4124 (95% CI: [0.3080, 0.5210])
-Target Scale Factor vs Peak: 0.8396 (83.96%)
-Reweighted Expected Stage 2 Score (Target Model): 0.3952
+3. SUBMISSION TARGET MODEL (google-cloud/gemini-4-argon)
+Target Dev Mean Score: 0.7269 (95% CI: [0.6377, 0.8107])
+Target Scale Factor vs Peak: 0.9878 (98.78%)
+Reweighted Expected Stage 2 Score (Target Model): 0.7144
 Official Qualifier Threshold: 0.1380
-Target Margin over Threshold: +0.2572 (2.86x)
+Target Margin over Threshold: +0.5764 (5.18x)
 ======================================================================

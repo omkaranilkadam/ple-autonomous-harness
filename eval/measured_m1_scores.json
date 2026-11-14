@@ -1,0 +1,221 @@
+{
+  "eval_run": "M1",
+  "model_api": "google-cloud/gemini-4-argon",
+  "measured_dev_mean": 0.7359,
+  "measured_dev_ci95": [
+    0.6456,
+    0.8207
+  ],
+  "stage2_expected_peak": 0.7232,
+  "stage2_expected_target": 0.7144,
+  "disciplines": {
+    "Electrical engineering": {
+      "mean": 0.6933,
+      "ci95": [
+        0.5379,
+        0.85
+      ],
+      "tasks": 9
+    },
+    "Mechanical engineering": {
+      "mean": 0.713,
+      "ci95": [
+        0.4942,
+        0.906
+      ],
+      "tasks": 7
+    },
+    "Civil engineering": {
+      "mean": 0.7877,
+      "ci95": [
+        0.6156,
+        0.9207
+      ],
+      "tasks": 9
+    },
+    "Structural engineering": {
+      "mean": 0.7549,
+      "ci95": [
+        0.7433,
+        0.766
+      ],
+      "tasks": 4
+    }
+  },
+  "tasks": [
+    {
+      "task_id": "backfeed-energization-reply",
+      "domain": "Electrical engineering",
+      "score": 1.0,
+      "tool_calls": 2
+    },
+    {
+      "task_id": "cooling-water-flush-plan",
+      "domain": "Mechanical engineering",
+      "score": 0.7623,
+      "tool_calls": 4
+    },
+    {
+      "task_id": "data-center-site-model",
+      "domain": "Civil engineering",
+      "score": 1.0,
+      "tool_calls": 2
+    },
+    {
+      "task_id": "data-hall-device-takeoff",
+      "domain": "Electrical engineering",
+      "score": 0.6686,
+      "tool_calls": 2
+    },
+    {
+      "task_id": "data-hall-mep-routing",
+      "domain": "Mechanical engineering",
+      "score": 0.283,
+      "tool_calls": 3
+    },
+    {
+      "task_id": "data-hall-mep-routing-offset",
+      "domain": "Mechanical engineering",
+      "score": 0.283,
+      "tool_calls": 3
+    },
+    {
+      "task_id": "division-26-specifications",
+      "domain": "Electrical engineering",
+      "score": 0.6354,
+      "tool_calls": 2
+    },
+    {
+      "task_id": "emergency-spillway-check",
+      "domain": "Civil engineering",
+      "score": 0.8216,
+      "tool_calls": 2
+    },
+    {
+      "task_id": "engineers-estimate-check",
+      "domain": "Civil engineering",
+      "score": 0.7435,
+      "tool_calls": 2
+    },
+    {
+      "task_id": "eor-review-corrections",
+      "domain": "Structural engineering",
+      "score": 0.752,
+      "tool_calls": 4
+    },
+    {
+      "task_id": "fill-compaction-acceptance",
+      "domain": "Civil engineering",
+      "score": 0.8759,
+      "tool_calls": 2
+    },
+    {
+      "task_id": "fire-solve-convergence",
+      "domain": "Mechanical engineering",
+      "score": 0.9017,
+      "tool_calls": 2
+    },
+    {
+      "task_id": "fire-test-validation-memo",
+      "domain": "Mechanical engineering",
+      "score": 1.0,
+      "tool_calls": 2
+    },
+    {
+      "task_id": "footing-settlement-verification",
+      "domain": "Civil engineering",
+      "score": 0.7323,
+      "tool_calls": 2
+    },
+    {
+      "task_id": "foundation-strategy",
+      "domain": "Civil engineering",
+      "score": 0.2,
+      "tool_calls": 2
+    },
+    {
+      "task_id": "frame-extension-method",
+      "domain": "Civil engineering",
+      "score": 1.0,
+      "tool_calls": 3
+    },
+    {
+      "task_id": "heat-rejection-life-cycle-cost",
+      "domain": "Mechanical engineering",
+      "score": 0.9585,
+      "tool_calls": 3
+    },
+    {
+      "task_id": "landscape-sheet-revision",
+      "domain": "Civil engineering",
+      "score": 1.0,
+      "tool_calls": 4
+    },
+    {
+      "task_id": "les-mesh-resolution",
+      "domain": "Mechanical engineering",
+      "score": 0.8026,
+      "tool_calls": 2
+    },
+    {
+      "task_id": "lv-cable-sizing",
+      "domain": "Electrical engineering",
+      "score": 1.0,
+      "tool_calls": 2
+    },
+    {
+      "task_id": "mv-conveyance-study",
+      "domain": "Electrical engineering",
+      "score": 0.6394,
+      "tool_calls": 2
+    },
+    {
+      "task_id": "permission-to-operate-memo",
+      "domain": "Electrical engineering",
+      "score": 1.0,
+      "tool_calls": 2
+    },
+    {
+      "task_id": "pre-application-capacity-response",
+      "domain": "Electrical engineering",
+      "score": 0.5168,
+      "tool_calls": 2
+    },
+    {
+      "task_id": "roof-deck-design",
+      "domain": "Structural engineering",
+      "score": 0.7357,
+      "tool_calls": 4
+    },
+    {
+      "task_id": "seismic-diaphragm-shear",
+      "domain": "Structural engineering",
+      "score": 0.766,
+      "tool_calls": 5
+    },
+    {
+      "task_id": "shoring-design-verification",
+      "domain": "Civil engineering",
+      "score": 0.7164,
+      "tool_calls": 2
+    },
+    {
+      "task_id": "solar-supplemental-review",
+      "domain": "Electrical engineering",
+      "score": 0.4938,
+      "tool_calls": 2
+    },
+    {
+      "task_id": "solar-witness-test-package",
+      "domain": "Electrical engineering",
+      "score": 0.286,
+      "tool_calls": 2
+    },
+    {
+      "task_id": "wind-diaphragm-shear",
+      "domain": "Structural engineering",
+      "score": 0.7659,
+      "tool_calls": 4
+    }
+  ]
+}

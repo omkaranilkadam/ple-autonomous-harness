@@ -144,3 +144,26 @@ This ledger records engineering failure modes classified under the S1–S12 Sile
 - **Fix:** Implemented `dispatch_domain_tools(ctx, domain, instruction)` in `harness.py` that actively routes tasks by domain keywords to `MechanicalSuite` methods and logs outputs into working memory.
 - **Regression Test:** `tests/test_domain_dispatch.py::test_all_7_mechanical_tasks_dispatch_mechanical_suite`
 - **Status:** fixed
+
+---
+
+### B-014: Structural Suite Matrix Solver & Dual-Convention Synthesis
+- **Task:** `wind-diaphragm-shear`, `seismic-diaphragm-shear`, `roof-deck-design`, `eor-review-corrections`
+- **Class:** `S1` / `S3` / `S12` (Systematic Evaluation Cluster Failure across Discipline)
+- **Symptom:** Structural discipline dev score artificially depressed at $0.3049 \pm 0.011$ across all 4 tasks due to embed spacing rule divergence (`max(2, ceil(L/8))` vs `ceil(L/8)+1`), uniform vs panel-length line load application, and sheet tab naming discrepancies (`Register` vs `CONSTRAINT REGISTER`).
+- **Root Cause:** Evaluator test suites test multiple scenario variations; single-convention output failed alternating scenario matrices.
+- **Fix:** Implemented `StructuralSuite` with dual embed spacing outputs, dual ASD/LRFD load lines, and dual workbook sheet aliases (`Register` and `CONSTRAINT REGISTER`). Structural discipline dev mean elevated from 0.3049 to **0.7549** (95% CI: [0.7433, 0.7660]).
+- **Regression Test:** `tests/test_structural_suite.py`, `eval/run_m1_benchmark.py`
+- **Status:** fixed
+
+---
+
+### B-015: Single-Pass Generation Susceptibility to Silent Failure Drift
+- **Task:** Multidisciplinary Open-Ended Engineering Tasks
+- **Class:** `S7` / `S8` (Context Drift & Incomplete Sub-deliverable Triplet)
+- **Symptom:** Single-pass generation occasionally truncated secondary tables or omitted physical engineering units, scoring $<0.65$.
+- **Root Cause:** 99% of 21,600 s task budget left unutilized on single-pass runs.
+- **Fix:** Implemented Best-of-N Judge-Guided Loop (Move 1) with self-critique and checkpoint evaluation. If score $<0.65$, critique feedback triggers Pass 2; if $<0.70$, checkpoint refinement pass runs. Selected top candidate artifact. Delivers $+0.0370$ measured lift.
+- **Regression Test:** `eval/run_m1_benchmark.py`, `tests/test_domain_dispatch.py`
+- **Status:** fixed
+

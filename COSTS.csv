@@ -35,3 +35,9 @@ cycle,task_id,model,tokens_in,tokens_out,wall_s,tool_calls,score
 1,wind-diaphragm-shear,google-cloud/gemini-3.8-flash,42,44,0.00,1,0.0
 1,wind-diaphragm-shear,google-cloud/gemini-3.8-flash,42,44,0.00,1,0.0
 1,wind-diaphragm-shear,google-cloud/gemini-3.8-flash,42,44,0.00,1,0.0
+1,wind-diaphragm-shear,google-cloud/gemini-3.8-flash,42,44,0.00,1,0.0
+1,wind-diaphragm-shear,google-cloud/gemini-3.8-flash,42,44,0.00,1,0.0
+1,wind-diaphragm-shear,google-cloud/gemini-3.8-flash,42,44,0.00,1,0.0
+1,wind-diaphragm-shear,google-cloud/gemini-3.8-flash,42,44,0.00,1,0.0
+1,wind-diaphragm-shear,google-cloud/gemini-3.8-flash,42,44,0.00,1,0.0
+1,wind-diaphragm-shear,google-cloud/gemini-3.8-flash,42,44,0.00,1,0.0

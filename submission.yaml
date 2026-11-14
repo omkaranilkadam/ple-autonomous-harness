@@ -1,5 +1,5 @@
 name: ple-autonomous-harness
-model_api: google-cloud/gemini-3.8-flash
+model_api: google-cloud/gemini-4-argon
 install: >-
   uv venv --python 3.12 /opt/harness/venv
   && uv pip install --python /opt/harness/venv/bin/python -r {src}/requirements.txt

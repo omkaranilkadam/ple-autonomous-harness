@@ -45,7 +45,7 @@ def test_task1_wind_diaphragm_shear():
     ok, msg = CodeClauseVerifier.verify_clause("ASCE 7-16", "26.10")
     assert ok, msg
     print("  Task 1 PASS: Domain values reproduced within tolerance")
-    return qz_path1
+    assert qz_path1 > 0.0
 
 def test_task2_footing_settlement():
     print("Testing Task 2 (footing-settlement-verification) domain calculations...")
@@ -70,7 +70,7 @@ def test_task2_footing_settlement():
     print(f"  Path 1 S_c = {settlement_in_path1:.4f} in | Path 2 S_c = {settlement_in_path2:.4f} in (rel_diff={rel_diff:.6f})")
     assert rel_diff < 0.001, f"Tolerance exceeded on settlement: {rel_diff}"
     print("  Task 2 PASS: Domain values reproduced within tolerance")
-    return settlement_in_path1
+    assert settlement_in_path1 > 0.0
 
 def test_task3_data_center_site_model(tmp_path):
     print("Testing Task 3 (data-center-site-model) IFC4 roundtrip...")
@@ -97,7 +97,7 @@ def test_task3_data_center_site_model(tmp_path):
     ok, msg = IFC4Handler.roundtrip_check(ifc_path, ifc_path)
     assert ok, msg
     print("  Task 3 PASS: IFC entity roundtrip verified")
-    return counts
+
 
 def main():
     import tempfile
