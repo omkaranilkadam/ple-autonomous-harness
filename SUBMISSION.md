@@ -21,4 +21,4 @@
 - **Verified Dev Tasks:** 29 / 29 (100% verified under G1–G6 Truth Gate)
 - **Artifact File Count:** 99 files (≤ 10,000 limit)
 - **Artifact Directory Size:** 25.37 MiB (≤ 512 MiB limit)
-- **Git Commit SHA:** `0bce9a4b5868946d46c52bd641e6635446d93b07`
+- **Git Commit SHA:** `7873e8458f4e45c186eb1ee74a7a0cfc8bbda732`
