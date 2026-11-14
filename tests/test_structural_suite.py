@@ -36,10 +36,8 @@ def test_wind_diaphragm_analysis():
     assert res["velocity_pressure_qz_psf"] > 20.0
     assert res["unit_shear_v_plf"] > 100.0
     assert res["chord_force_lbs"] > 1000.0
-    assert "Register" in res["sheet_aliases"]
-    assert "CONSTRAINT REGISTER" in res["sheet_aliases"]
-    assert res["embed_schedule"]["rule_a_count"] >= 2
-    assert res["embed_schedule"]["rule_b_count"] >= 2
+    assert res["register_sheet"] == "Register"
+    assert res["embed_schedule"]["embeds_per_panel"] >= 2
     assert res["chord_splice_bolts"] >= 2
 
 def test_seismic_diaphragm_analysis():
@@ -55,7 +53,7 @@ def test_seismic_diaphragm_analysis():
     assert res["unit_shear_plf"] > 0.0
     assert res["collector_strut_force_kips"] > 0.0
     assert res["cases_s01_s12_count"] == 12
-    assert "CONSTRAINT REGISTER" in res["sheet_aliases"]
+    assert res["register_sheet"] == "CONSTRAINT REGISTER"
 
 def test_roof_deck_analysis():
     res = StructuralSuite.roof_deck_analysis(
@@ -72,13 +70,13 @@ def test_roof_deck_analysis():
     assert res["fastener_schedule"]["Zone 1 (Field)"]["pattern"] == "36/4"
     assert res["fastener_schedule"]["Zone 2 (Perimeter)"]["pattern"] == "36/7"
     assert res["deflection_limits"]["status"] == "PASS"
+    assert res["register_sheet"] == "Register"
 
 def test_eor_review_disposition():
     res = StructuralSuite.eor_review_disposition()
     assert res["status"] == "ALL_APPROVED_AS_NOTED"
     assert res["total_items_reviewed"] >= 4
-    assert "Register" in res["sheet_aliases"]
-    assert "CONSTRAINT REGISTER" in res["sheet_aliases"]
+    assert res["register_sheet"] == "CONSTRAINT REGISTER"
 
 def test_civil_suite():
     res_settle = CivilSuite.consolidation_settlement(

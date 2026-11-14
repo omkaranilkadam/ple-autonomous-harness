@@ -755,9 +755,8 @@ class StructuralSuite:
         # Chord tension / compression force T = C = w * L^2 / (8 * b) (lbs)
         chord_force_lbs = (w_asd_plf * (span_ft ** 2)) / (8.0 * width_ft)
         
-        # Embed spacing conventions
-        rule_a_embeds = max(2, math.ceil(panel_length_ft / 8.0))
-        rule_b_embeds = math.ceil(panel_length_ft / 8.0) + 1
+        # Evidenced embed rule selection per project criteria (PC-S01 note 4: max(2, ceil(L/8)))
+        embeds_count = max(2, math.ceil(panel_length_ft / 8.0))
         
         # Chord splice connection (3/4" A325 bolts in single shear, ASD capacity = 8.95 kips)
         bolts_required = max(2, math.ceil(chord_force_lbs / 8950.0))
@@ -773,13 +772,12 @@ class StructuralSuite:
             "unit_shear_v_plf": round(unit_shear_plf, 1),
             "chord_force_lbs": round(chord_force_lbs, 1),
             "embed_schedule": {
-                "rule_a_count": rule_a_embeds,
-                "rule_b_count": rule_b_embeds,
-                "governing_count": max(rule_a_embeds, rule_b_embeds),
-                "spacing_in": round((panel_length_ft * 12.0) / max(1, rule_a_embeds - 1), 1)
+                "rule_applied": "PC-S01 Rule A: max(2, ceil(L/8))",
+                "embeds_per_panel": embeds_count,
+                "spacing_in": round((panel_length_ft * 12.0) / max(1, embeds_count - 1), 1)
             },
             "chord_splice_bolts": bolts_required,
-            "sheet_aliases": ["Register", "CONSTRAINT REGISTER"],
+            "register_sheet": "Register",
             "status": "PASS"
         }
 
@@ -842,7 +840,7 @@ class StructuralSuite:
             "torsion_amplification_ax": ax,
             "collector_strut_force_kips": round(collector_force_kips, 2),
             "cases_s01_s12_count": len(cases_matrix),
-            "sheet_aliases": ["Register", "CONSTRAINT REGISTER"],
+            "register_sheet": "CONSTRAINT REGISTER",
             "status": "PASS"
         }
 
@@ -896,7 +894,7 @@ class StructuralSuite:
                 "actual_deflection_in": round(delta_live_limit_in * 0.45, 3),
                 "status": "PASS"
             },
-            "sheet_aliases": ["Register", "CONSTRAINT REGISTER"],
+            "register_sheet": "Register",
             "status": "PASS"
         }
 
@@ -906,11 +904,10 @@ class StructuralSuite:
     ) -> Dict[str, Any]:
         """
         Dispositions for EOR structural review items, sheet indices, and revision logs.
-        Guarantees dual sheet names: 'Register' and 'CONSTRAINT REGISTER'.
         """
         default_items = [
             {"item_id": "EOR-001", "sheet": "S-101", "comment": "Verify diaphragm boundary nail spacing at grid line 1", "disposition": "Approved as Noted", "resolution": "Added 36/7 fastening schedule with 6 in. sidelap spacing"},
-            {"item_id": "EOR-002", "sheet": "S-201", "comment": "Reconcile precast panel embed spacing with architectural reveal", "disposition": "Approved as Noted", "resolution": "Applied dual-convention embed schedule (Rule A and Rule B compliant)"},
+            {"item_id": "EOR-002", "sheet": "S-201", "comment": "Reconcile precast panel embed spacing with architectural reveal", "disposition": "Approved as Noted", "resolution": "Applied PC-S01 Rule A embed schedule"},
             {"item_id": "EOR-003", "sheet": "S-301", "comment": "Check collector drag strut capacity at dock door opening", "disposition": "Approved as Noted", "resolution": "Collector reinforced with TS 6x6x3/8 drag strut"},
             {"item_id": "EOR-004", "sheet": "S-501", "comment": "Update code citation to Montana ARM 24.301.131", "disposition": "Approved as Noted", "resolution": "Pinned 2021 IBC Montana state amendment incorporated in notes"},
         ]
@@ -921,7 +918,7 @@ class StructuralSuite:
             "total_items_reviewed": len(items),
             "dispositions": {it["item_id"]: it["disposition"] for it in items},
             "sheet_indices": ["S-101", "S-201", "S-301", "S-501"],
-            "sheet_aliases": ["Register", "CONSTRAINT REGISTER"],
+            "register_sheet": "CONSTRAINT REGISTER",
             "status": "ALL_APPROVED_AS_NOTED"
         }
 

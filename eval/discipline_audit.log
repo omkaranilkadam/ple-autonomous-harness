@@ -4,30 +4,26 @@ Audit Source: C:\Users\kadam\Downloads\pro\scores.json
 Total Dev Tasks: 29
 ======================================================================
 
-1. DEV BENCHMARK SCORES (Peak Model: claude-opus-5-5)
+1. DEV BENCHMARK SCORES (Target Submission Model: google-cloud/gemini-4-argon)
 Discipline                 Tasks   Dev Weight   Mean Score   95% Bootstrap CI
 ----------------------------------------------------------------------
-Civil engineering          9        31.0%      0.7877       [0.6156, 0.9207]
-Electrical engineering     9        31.0%      0.6933       [0.5379, 0.8500]
-Mechanical engineering     7        24.1%      0.7130       [0.4942, 0.9060]
-Structural engineering     4        13.8%      0.7549       [0.7433, 0.7660]
+Civil engineering          9        31.0%      0.7272       [0.6394, 0.8206]
+Electrical engineering     9        31.0%      0.6433       [0.5089, 0.7939]
+Mechanical engineering     7        24.1%      0.6764       [0.5971, 0.7579]
+Structural engineering     4        13.8%      0.6175       [0.5825, 0.6500]
 ----------------------------------------------------------------------
-TOTAL DEV (29 Tasks)       29      100.0%      0.7359       [0.6456, 0.8207]
+TOTAL DEV (29 Tasks)       29      100.0%      0.6738       [0.6172, 0.7343]
 
 2. STAGE 2 HIDDEN TEST REWEIGHTING (56 Hidden Tasks)
 Discipline                 Dev Mean     Hidden Weight   Contribution
 ----------------------------------------------------------------------
-Civil engineering          0.7877        16.1%          0.1266      
-Electrical engineering     0.6933        32.1%          0.2228      
-Mechanical engineering     0.7130        41.1%          0.2928      
-Structural engineering     0.7549        10.7%          0.0809      
+Civil engineering          0.7272        16.1%          0.1169      
+Electrical engineering     0.6433        32.1%          0.2068      
+Mechanical engineering     0.6764        41.1%          0.2778      
+Structural engineering     0.6175        10.7%          0.0662      
 ----------------------------------------------------------------------
-Reweighted Expected Stage 2 Score (Peak Model): 0.7232
-
-3. SUBMISSION TARGET MODEL (google-cloud/gemini-4-argon)
-Target Dev Mean Score: 0.7269 (95% CI: [0.6377, 0.8107])
-Target Scale Factor vs Peak: 0.9878 (98.78%)
-Reweighted Expected Stage 2 Score (Target Model): 0.7144
+Reweighted Expected Stage 2 Score (Target Model): 0.6676
 Official Qualifier Threshold: 0.1380
-Target Margin over Threshold: +0.5764 (5.18x)
+Target Margin over Threshold: +0.5296 (4.84x)
+Effective Token Cost: ~155,000 tokens/task (2-pass Best-of-N capped)
 ======================================================================

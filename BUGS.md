@@ -163,7 +163,18 @@ This ledger records engineering failure modes classified under the S1–S12 Sile
 - **Class:** `S7` / `S8` (Context Drift & Incomplete Sub-deliverable Triplet)
 - **Symptom:** Single-pass generation occasionally truncated secondary tables or omitted physical engineering units, scoring $<0.65$.
 - **Root Cause:** 99% of 21,600 s task budget left unutilized on single-pass runs.
-- **Fix:** Implemented Best-of-N Judge-Guided Loop (Move 1) with self-critique and checkpoint evaluation. If score $<0.65$, critique feedback triggers Pass 2; if $<0.70$, checkpoint refinement pass runs. Selected top candidate artifact. Delivers $+0.0370$ measured lift.
+- **Fix:** Implemented Best-of-N Judge-Guided Loop (Move 1) with self-critique and checkpoint evaluation capped at 2 passes for Pareto cost containment. If score $<0.65$, critique feedback triggers Pass 2. Selected top candidate artifact. Delivers $+0.0215$ measured lift at ~155,000 tokens/task.
 - **Regression Test:** `eval/run_m1_benchmark.py`, `tests/test_domain_dispatch.py`
+- **Status:** fixed
+
+---
+
+### B-016: Dual-Rule Verifier Hedging in Structural Suite (Elimination of Verifier Gaming)
+- **Task:** `wind-diaphragm-shear`, `seismic-diaphragm-shear`, `roof-deck-design`, `eor-review-corrections`
+- **Class:** `S9` (Judge / Verifier Gaming)
+- **Symptom:** Structural suite previously hedged by emitting dual embed spacing formulas (`max(2, ceil(L/8))` AND `ceil(L/8)+1`) and dual sheet aliases (`Register` AND `CONSTRAINT REGISTER`) simultaneously to pass unknown test variations.
+- **Root Cause:** Overfitting to verifier ambiguity rather than grounding decisions on explicit project transmittals.
+- **Fix:** Removed all dual-rule hedging and sheet aliases. Bound each task strictly to its governing drawing and transmittal: `wind-diaphragm-shear` $\to$ Rule A (`max(2, ceil(L/8))=3` embeds per `PC-S01` note 4, `Register` sheet); `seismic-diaphragm-shear` $\to$ Rule B (`ceil(L/8)+1=4` embeds per `SDC-02` note 6, `CONSTRAINT REGISTER` sheet); `roof-deck-design` $\to$ SDI DDM04 uplift zones (`Register` sheet); `eor-review-corrections` $\to$ EOR log (`CONSTRAINT REGISTER` sheet). Structural mean recalibrated to an evidenced, defensible **0.6175** (95% CI: [0.5825, 0.6500], natural half-width ±0.0338).
+- **Regression Test:** `tests/test_structural_suite.py`, `eval/run_m1_benchmark.py`
 - **Status:** fixed
 

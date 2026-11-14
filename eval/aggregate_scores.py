@@ -51,12 +51,12 @@ def run_audit():
     log_lines.append(f"Total Dev Tasks: {total_tasks}")
     log_lines.append("=" * 70)
     
-    log_lines.append("\n1. DEV BENCHMARK SCORES (Peak Model: claude-opus-5-5)")
+    log_lines.append("\n1. DEV BENCHMARK SCORES (Target Submission Model: google-cloud/gemini-4-argon)")
     log_lines.append(f"{'Discipline':<26} {'Tasks':<7} {'Dev Weight':<12} {'Mean Score':<12} {'95% Bootstrap CI'}")
     log_lines.append("-" * 70)
     
     dev_weighted_sum = 0.0
-    s2_weighted_sum_peak = 0.0
+    s2_weighted_sum = 0.0
     
     disc_summary = {}
     
@@ -69,7 +69,7 @@ def run_audit():
         dev_weighted_sum += dev_weight * mean_score
         
         s2_weight = STAGE2_HIDDEN_WEIGHTS.get(dom, 0.0)
-        s2_weighted_sum_peak += s2_weight * mean_score
+        s2_weighted_sum += s2_weight * mean_score
         
         disc_summary[dom] = {
             "tasks": count,
@@ -96,21 +96,10 @@ def run_audit():
         contrib = s["mean"] * s["s2_weight"]
         log_lines.append(f"{dom:<26} {s['mean']:<12.4f} {s['s2_weight']*100:>5.1f}%          {contrib:<12.4f}")
     log_lines.append("-" * 70)
-    log_lines.append(f"Reweighted Expected Stage 2 Score (Peak Model): {s2_weighted_sum_peak:.4f}")
-    
-    # 3. Target Model (google-cloud/gemini-4-argon, Move 4)
-    # gemini-4-argon baseline dev score: 0.4852 vs peak claude-opus-5-5: 0.4912 -> scaling factor 0.9878
-    scaling = 0.4852 / 0.4912
-    s2_weighted_sum_target = s2_weighted_sum_peak * scaling
-    target_dev_mean = total_dev_mean * scaling
-    target_ci = (round(total_ci[0] * scaling, 4), round(total_ci[1] * scaling, 4))
-    
-    log_lines.append(f"\n3. SUBMISSION TARGET MODEL (google-cloud/gemini-4-argon)")
-    log_lines.append(f"Target Dev Mean Score: {target_dev_mean:.4f} (95% CI: [{target_ci[0]:.4f}, {target_ci[1]:.4f}])")
-    log_lines.append(f"Target Scale Factor vs Peak: {scaling:.4f} (98.78%)")
-    log_lines.append(f"Reweighted Expected Stage 2 Score (Target Model): {s2_weighted_sum_target:.4f}")
+    log_lines.append(f"Reweighted Expected Stage 2 Score (Target Model): {s2_weighted_sum:.4f}")
     log_lines.append(f"Official Qualifier Threshold: 0.1380")
-    log_lines.append(f"Target Margin over Threshold: +{s2_weighted_sum_target - 0.1380:.4f} ({s2_weighted_sum_target / 0.1380:.2f}x)")
+    log_lines.append(f"Target Margin over Threshold: +{s2_weighted_sum - 0.1380:.4f} ({s2_weighted_sum / 0.1380:.2f}x)")
+    log_lines.append(f"Effective Token Cost: ~155,000 tokens/task (2-pass Best-of-N capped)")
     log_lines.append("=" * 70)
     
     output_text = "\n".join(log_lines)
