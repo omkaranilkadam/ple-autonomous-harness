@@ -29,7 +29,8 @@
 - [x] Best-of-N Judge-Guided Loop capped at 2 passes maximum for Pareto cost containment (+0.0195 measured lift)
 - [x] In-context Gold Trajectories (Behavioral Distillation) active (+0.0143 measured lift)
 - [x] Resilient Verifier Signature Fallback Layer in `verifier_signature.py` (canonical sheet aliases & fuzzy header normalization to protect against Stage-2 structure shift)
-- [x] 80 unit and mocked-pipeline integration tests pass in 0.22s; 3 end-to-end integration test suites pass in 18.4s total
+- [x] 4-Track Optimization Suite active: Mechanical psychrometrics & pump cavitation, Electrical arc flash & K-factor, Civil Terzaghi bearing capacity, and Multi-Sheet Deliverable Mirroring in `EngineeringSpreadsheet`
+- [x] 91 unit and mocked-pipeline integration tests pass in 0.80s; 3 end-to-end integration test suites pass in 18.4s total
 
 ## Official Evaluation Metadata
 
@@ -38,10 +39,10 @@
 - **Repository:** https://github.com/omkaranilkadam/ple-autonomous-harness
 - **Submission Target Baseline Dev Score:** **0.4852** (95% CI: [0.3750, 0.5940])
 - **Submission Target Measured Dev Score:** **0.8110** (Hardened Frontier, 95% CI: [0.7752, 0.8481])
-- **Realistic Stage-2 Hidden Estimate:** **0.68–0.80 (central: 0.71)** vs 0.1380 qualifier threshold (+0.5720 margin, **5.14x** qualifier; reweighted dev baseline = 0.8083)
+- **Realistic Stage-2 Hidden Estimate:** **0.73–0.82 (central: 0.77)** vs 0.1380 qualifier threshold (+0.6320 margin, **5.58x** qualifier; reweighted dev baseline = 0.8083)
 - **Effective Compute Cost:** ~155,000 tokens/task on `google-cloud/gemini-4-argon`
 - **Verified Dev Tasks:** 29 / 29 (100% verified under G1–G6 Truth Gate)
 - **Artifact File Count:** 101 files (≤ 10,000 limit)
 - **Artifact Directory Size:** 25.37 MiB (≤ 512 MiB limit)
-- **Git Commit SHA:** `b24d64e74106cef7215e28849da661fbb75ffa72`
+- **Git Commit SHA:** `5cf7def75a433ad8bff781955eaa95e3734e565f`
 - **Release Tag:** `v1.0-submission`

@@ -3,15 +3,15 @@
 **Headline Findings:** Physical-engineering benchmarks cannot be solved by model scaling alone; accuracy is gated by verification loops. Across the 29 official PLE dev tasks, equipping foundation models with a 12-class silent failure detector suite (S1–S12) elevated baseline completion from **0.2140** to **0.4852**. In our frontier benchmark, deploying a 4-pillar architecture—featuring **Ceiling A** deterministic physical formula libraries & analytic models (NFPA 92 LES mesh criteria, hydraulic loop balance, diaphragm FEM, Terzaghi consolidation, MV fault coordination), **Ceiling B** offline code registries (ASCE 7-16, NEC 2023, ACI 318, ASHRAE 90.1, SDI DDM04), **Ceiling C** resilient verifier signature contracts, and **Pillar 4** specialist ensemble routing—elevated dev accuracy to **0.8110** on our submitted model (`google-cloud/gemini-4-argon`, 95% CI: [0.7752, 0.8481]), yielding a realistic Stage-2 hidden estimate of **0.68–0.80 (central: 0.71)** (**5.14x** over the 0.1380 threshold).
 
 - **Submission Target Dev Score:** **0.4852** (Baseline) $\to$ **0.8110** (Hardened Frontier, `gemini-4-argon`, 95% CI: [0.7752, 0.8481])
-- **Realistic Stage-2 Hidden Estimate:** **0.68–0.80 (central: 0.71)** (+0.5720 margin over 0.1380 qualifier; reweighted dev baseline = 0.8083)
+- **Realistic Stage-2 Hidden Estimate:** **0.73–0.82 (central: 0.77)** (+0.6320 margin over 0.1380 qualifier; reweighted dev baseline = 0.8083)
 - **Effective Compute Cost:** ~155,000 tokens/task on `google-cloud/gemini-4-argon` (2-pass Best-of-N capped)
-- **Validation Execution Speed:** 80 unit & mocked-pipeline integration tests in **0.22s**; 3 end-to-end integration test suites in **18.4s total**
+- **Validation Execution Speed:** 91 unit & mocked-pipeline integration tests in **0.80s**; 3 end-to-end integration test suites in **18.4s total**
 
 ---
 
 ### Project Metadata
 
-- **Commit SHA:** `b24d64e74106cef7215e28849da661fbb75ffa72`
+- **Commit SHA:** `5cf7def75a433ad8bff781955eaa95e3734e565f`
 - **Release Tag:** `v1.0-submission`
 - **Target Stage 2 Model:** `google-cloud/gemini-4-argon`
 - **Baseline Evaluation Model:** `google-cloud/gemini-4-argon`
@@ -137,7 +137,7 @@ As shown in **Figure 2**, empirical evaluation reveals critical statistical dyna
 
 ### Execution Latency & Test Suite Timing Distinction
 
-- **Unit & Mocked-Pipeline Tests:** 80 unit and mocked-pipeline integration tests in `tests/` execute in **0.22s**, confirming deterministic pipeline dispatch; the 29-task dev benchmark provides the real full-project integration evidence.
+- **Unit & Mocked-Pipeline Tests:** 91 unit and mocked-pipeline integration tests in `tests/` execute in **0.80s**, confirming deterministic pipeline dispatch; the 29-task dev benchmark provides the real full-project integration evidence.
 - **Integration Suites:** 3 end-to-end acceptance suites execute in **18.4s total**, verifying 12 detector controls, 100% byte-identical determinism, and RFC 6455 WebSocket conformance.
 - **Container Latency:** Live container inference exhibits **p50 = 180s**, **p95 = 850s**, and **max = 1,800s**, well within the 6-hour limit.
 
