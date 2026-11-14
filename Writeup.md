@@ -9,7 +9,8 @@
 ---
 
 ### Project Metadata
-- **Commit SHA:** `9aa37dc92b57e440940371e92a4c0a335d46fa60`
+- **Commit SHA:** `6904e53743426e14d34b0abc3752c9489c405c2e`
+- **Release Tag:** `v1.0-submission`
 - **Target Stage 2 Model:** `google-cloud/gemini-3.8-flash`
 - **Baseline Evaluation Model:** `google-cloud/claude-opus-5-5`
 - **Official Judge Disclosed:** Claude Opus 5.5 (`JUDGE_MODEL=claude-opus-5-5`) via official proxy
