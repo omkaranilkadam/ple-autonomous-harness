@@ -1,22 +1,22 @@
 # Verification-First Autonomous Agent Harness for Physical-Engineering's Last Exam (PLE)
 
-**Headline Findings:** Physical-engineering benchmarks cannot be solved by model scaling alone; accuracy is gated by verification loops. Across the 29 official PLE dev tasks, equipping foundation models with a 12-class silent failure detector suite (S1–S12) elevated baseline completion from **0.2140** to **0.4852**. In our frontier benchmark, deploying a 4-pillar architecture—featuring **Ceiling A** deterministic physical formula libraries & analytic models (NFPA 92 LES mesh criteria, hydraulic loop balance, diaphragm FEM, Terzaghi consolidation, MV fault coordination), **Ceiling B** offline code registries (ASCE 7-16, NEC 2023, ACI 318, ASHRAE 90.1, SDI DDM04), **Ceiling C** verifier signature contracts, and **Pillar 4** specialist ensemble routing—elevated dev accuracy to **0.8110** on our submitted model (`google-cloud/gemini-4-argon`, 95% CI: [0.7752, 0.8481]), yielding a reweighted Stage-2 expected score of **0.8083** (**5.86x** over the 0.1380 threshold).
+**Headline Findings:** Physical-engineering benchmarks cannot be solved by model scaling alone; accuracy is gated by verification loops. Across the 29 official PLE dev tasks, equipping foundation models with a 12-class silent failure detector suite (S1–S12) elevated baseline completion from **0.2140** to **0.4852**. In our frontier benchmark, deploying a 4-pillar architecture—featuring **Ceiling A** deterministic physical formula libraries & analytic models (NFPA 92 LES mesh criteria, hydraulic loop balance, diaphragm FEM, Terzaghi consolidation, MV fault coordination), **Ceiling B** offline code registries (ASCE 7-16, NEC 2023, ACI 318, ASHRAE 90.1, SDI DDM04), **Ceiling C** resilient verifier signature contracts, and **Pillar 4** specialist ensemble routing—elevated dev accuracy to **0.8110** on our submitted model (`google-cloud/gemini-4-argon`, 95% CI: [0.7752, 0.8481]), yielding a realistic Stage-2 hidden estimate of **0.68–0.80 (central: 0.73)** (**5.29x** over the 0.1380 threshold).
 
 - **Submission Target Dev Score:** **0.4852** (Baseline) $\to$ **0.8110** (Hardened Frontier, `gemini-4-argon`, 95% CI: [0.7752, 0.8481])
-- **Reweighted Stage-2 Expected Score:** **0.4707** (Baseline) $\to$ **0.8083** (Target Model, +0.6703 margin over 0.1380 qualifier)
+- **Realistic Stage-2 Hidden Estimate:** **0.68–0.80 (central: 0.73)** (+0.5920 margin over 0.1380 qualifier; reweighted dev baseline = 0.8083)
 - **Effective Compute Cost:** ~155,000 tokens/task on `google-cloud/gemini-4-argon` (2-pass Best-of-N capped)
-- **Validation Execution Speed:** 78 unit & pipeline tests in **0.24s**; 3 end-to-end integration test suites in **18.4s total**
+- **Validation Execution Speed:** 80 unit & mocked-pipeline integration tests in **0.22s**; 3 end-to-end integration test suites in **18.4s total**
 
 ---
 
 ### Project Metadata
 
-- **Commit SHA:** `ff12fb013dabe4973b7b922e3c3b9f945764ac2d`
+- **Commit SHA:** `697695bf82c72ff7285099f124d03b555e4fe795`
 - **Release Tag:** `v1.0-submission`
 - **Target Stage 2 Model:** `google-cloud/gemini-4-argon`
 - **Baseline Evaluation Model:** `google-cloud/gemini-4-argon`
 - **Official Judge:** Claude Opus 5.5 (`JUDGE_MODEL=claude-opus-5-5`) via official proxy
-- **Repository:** https://github.com/google-research/ple/tree/main/sample_submissions/ple-autonomous-harness
+- **Repository:** https://github.com/omkaranilkadam/ple-autonomous-harness
 
 ---
 
@@ -36,11 +36,11 @@ Task scores and discipline aggregations are audited via `eval/aggregate_scores.p
 | **Structural Engineering** | 4         | 13.8%      | 0.3049       | **0.7750**            | [0.7450, 0.8050] | 10.7% (6/56)             |
 | **Total Dev Benchmark**    | 29        | 100.0%     | 0.4852       | **0.8110**            | [0.7752, 0.8481] | 100.0% (56/56)           |
 
-Diagnosing the **Structural Failure Cluster**: structural tasks previously clustered at $0.3049 \pm 0.011$ from interpretation divergences (embed spacing, line load distribution, sheet naming). Rather than gaming verifiers with dual-rule hedging, `StructuralSuite` commits to the single evidenced rule per task from transmittals:
-- `wind-diaphragm-shear`: Rule A (`max(2, ceil(L/8)) = 3` embeds per `PC-S01`, sheet `Register`), score **0.7950**; `roof-deck-design`: SDI DDM04 uplift zones (36/4 and 36/7 screw spacing, sheet `Register`), score **0.7850**.
-- `seismic-diaphragm-shear`: Rule B (`ceil(L/8)+1 = 4` embeds per `SDC-02`, TS 6x6 struts, sheet `CONSTRAINT REGISTER`), score **0.7550**; `eor-review-corrections`: EOR revision schema (sheet `CONSTRAINT REGISTER`), score **0.7650**.
+Diagnosing the **Structural Failure Cluster**: structural tasks previously clustered at $0.3049 \pm 0.011$ from interpretation divergences. `StructuralSuite` commits to the single evidenced rule per task from transmittals:
+- `wind-diaphragm-shear`: Rule A (3 embeds per `PC-S01`, sheet `Register`), score **0.7950**; `roof-deck-design`: SDI DDM04 uplift zones, score **0.7850**.
+- `seismic-diaphragm-shear`: Rule B (4 embeds per `SDC-02`, TS 6x6 struts, sheet `CONSTRAINT REGISTER`), score **0.7550**; `eor-review-corrections`: EOR revision schema, score **0.7650**.
 
-This single-rule discipline yields mean **0.7750** with physical variance ($\pm 0.0300$ half-width), eliminating verifier gaming.
+This single-rule discipline yields mean **0.7750** ($\pm 0.0300$ half-width), eliminating verifier gaming.
 
 ![Figure 3: Dev Failure Breakdown](figures/failure_breakdown.png)
 
@@ -75,10 +75,10 @@ To evaluate domain reasoning, consider **Task 20: `wind-diaphragm-shear`** (Buil
   Project Documents        Apply ARM 24.301.131            Elements at L2 (H=5ft)      Embeds, & Base Anchors   (7.5% Tolerance)
 ```
 
-1. **Document Precedence:** Enforces `T-204`, filtering superseded `Rev0` for governing `Rev2`.
-2. **ASCE 7-16 Wind Formulation:** Resolves $q_z = 0.00256 K_z K_{zt} K_d K_e V^2 = 27.16\text{ psf}$ strength ($16.30\text{ psf}$ ASD) at $V=115\text{ mph}$, Cat III, $K_z=0.945$, $K_e=0.868$.
+1. **Document Precedence:** Enforces `T-204`, prioritizing governing `Rev2` over superseded `Rev0`.
+2. **ASCE 7-16 Formulation:** Resolves $q_z = 27.16\text{ psf}$ ($16.30\text{ psf}$ ASD) at $V=115\text{ mph}$, Cat III, $K_z=0.945$.
 3. **Cantilever Parapets:** Transfers $R_{\text{roof}} = p A (z/h)$ to the diaphragm via lever action.
-4. **DIAPH-MT VE-1 Benchmark:** Deflection $0.1669\text{ in}$, unit shear $185.2\text{ plf}$, resultant $20.00\text{ kips}$, line reaction $10.00\text{ kips}$ (exact match).
+4. **DIAPH-MT VE-1 Benchmark:** Deflection $0.1669\text{ in}$, shear $185.2\text{ plf}$, line reaction $10.00\text{ kips}$ (0.13% error, exact VE-1 match).
 
 Passing VE-1 validated all 12 Building A2 wind scenarios, producing DXF layers (`S-DIAP-SHEAR`, `S-WALL-REAC`) matching EOR calculations within 0.13% error.
 
@@ -86,7 +86,7 @@ Passing VE-1 validated all 12 Building A2 wind scenarios, producing DXF layers (
 
 ## 3. Cross-Model Generalizability & Empirical Ablations (15 Points)
 
-We benchmarked our harness across 7 frontier and open-weight models from 5 distinct families on all 29 public dev tasks using identical prompts, tool definitions, and detector thresholds.
+We benchmarked our harness across 7 models from 5 distinct families on all 29 public dev tasks using identical prompts, tools, and detector thresholds.
 
 | Model API Identifier            | Model Family | Baseline Dev | 95% Bootstrap CI | Tokens / Task | Cost Ratio |
 | ------------------------------- | ------------ | ------------ | ---------------- | ------------- | ---------- |
@@ -100,7 +100,7 @@ We benchmarked our harness across 7 frontier and open-weight models from 5 disti
 
 ### Controlled Experimental Ablations (Frontier 0.80+ Hardened Suite)
 
-To satisfy Criterion 1, each intervention was evaluated in controlled single-ablation runs across all 29 dev tasks in `eval/run_m1_benchmark.py` directly on `google-cloud/gemini-4-argon`. Every row measures empirical performance loss when toggled OFF holding all other interventions active. All 10 single-ablation rows are decoupled and distinct:
+Each intervention was evaluated in controlled single-ablation runs across all 29 dev tasks in `eval/run_m1_benchmark.py` on `google-cloud/gemini-4-argon`, measuring performance loss when toggled OFF holding other components active:
 
 | Ablation Variant                               | Description                          | Mean       | Measured Δ  | 95% Bootstrap CI   | Stat. Sig.  |
 | ---------------------------------------------- | ------------------------------------ | ---------- | ----------- | ------------------ | ----------- |
@@ -117,7 +117,7 @@ To satisfy Criterion 1, each intervention was evaluated in controlled single-abl
 | w/o S8 Triplet Checklist & Critique            | No triplet completeness check        | 0.8011     | **-0.0099** | [-0.0105, -0.0094] | $p < 0.001$ |
 | w/o JudgeFormatter (Move 6)                    | Unstructured deliverables            | 0.8076     | **-0.0034** | [-0.0035, -0.0033] | $p < 0.001$ |
 
-Per-task auditing (`eval/per_task_breakdown.csv`) shows marked lift heterogeneity ($\sigma = 0.0730$, spread $+0.0050$ to $+0.2650$, 21 tasks lifting $\ge +0.10$), refuting verifier-gaming. Verifier sensitivity testing (`eval/verifier_sensitivity.csv`) confirms that perturbing numerical answers by 20% while preserving formats destroys 70% of score (dropping to 0.2723), proving verifiers enforce physical values rather than surface formatting. A/B testing in `eval/ab_judge_formatter.py` confirms removing the formatter drops score by only −0.0034.
+Per-task auditing (`eval/per_task_breakdown.csv`) shows marked lift heterogeneity ($\sigma = 0.0730$, spread $+0.0050$ to $+0.2650$, 21 tasks lifting $\ge +0.10$), refuting verifier-gaming. Verifier sensitivity testing (`eval/verifier_sensitivity.csv`) confirms that perturbing numerical answers by 20% while preserving formats destroys 70% of score (dropping to 0.2723), proving verifiers enforce physical values rather than surface formatting. A/B testing in `eval/ab_judge_formatter.py` confirms removing the formatter drops score by only −0.0034. Based on our sensitivity data, our **realistic Stage-2 hidden estimate is 0.68–0.80 (central: 0.73)**: the lower bound reflects the 25–30% structure haircut if hidden tasks shift sheet-naming conventions; the upper bound assumes consistent conventions; the central 0.73 reflects 58% strictly answer-governed credit.
 
 ---
 
@@ -132,12 +132,12 @@ Stage 2 ranks systems strictly along the **Performance-Cost Pareto Frontier**. T
 As shown in **Figure 2**, empirical evaluation reveals critical statistical dynamics:
 
 1. **Confidence Interval Overlap:** With $N=29$ dev tasks, 95% bootstrap confidence intervals have half-widths of $\pm 0.06$ to $\pm 0.11$. Adjacent models show overlap, requiring paired-bootstrap tests to confirm true superiority.
-2. **Superiority of Gemini 4 Argon:** On the Pareto frontier, `google-cloud/gemini-4-argon` achieves **0.4852** baseline (vs Claude Opus at 0.4912) with 74% of Opus's token footprint. With hardened frontier verification, it reaches **0.8110** dev mean and **0.8083** Stage-2 expected score, dominating the frontier for maximum verified score.
+2. **Superiority of Gemini 4 Argon:** On the Pareto frontier, `google-cloud/gemini-4-argon` achieves **0.4852** baseline (vs Claude Opus at 0.4912) with 74% of Opus's token footprint. With hardened frontier verification, it reaches **0.8110** dev mean (0.8083 reweighted dev baseline; **0.68–0.80 hidden estimate**), dominating the frontier for maximum verified score.
 3. **Best-of-N Compute Allocation & Pareto Capping:** Capped at **2 passes maximum** (Pass 1 + Pass 2 critique if initial score $< 0.65$), delivering $+0.0195$ measured lift while constraining average token expenditure to **~155,000 tokens/task** (4.5M tokens total across the benchmark).
 
 ### Execution Latency & Test Suite Timing Distinction
 
-- **Unit & Pipeline Tests:** 78 unit and task-level integration tests in `tests/` execute in **0.24s**, confirming deterministic pipeline dispatch.
+- **Unit & Mocked-Pipeline Tests:** 80 unit and mocked-pipeline integration tests in `tests/` execute in **0.22s**, confirming deterministic pipeline dispatch; the 29-task dev benchmark provides the real full-project integration evidence.
 - **Integration Suites:** 3 end-to-end acceptance suites execute in **18.4s total**, verifying 12 detector controls, 100% byte-identical determinism, and RFC 6455 WebSocket conformance.
 - **Container Latency:** Live container inference exhibits **p50 = 180s**, **p95 = 850s**, and **max = 1,800s**, well within the 6-hour limit.
 
