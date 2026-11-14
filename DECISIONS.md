@@ -11,3 +11,7 @@
 | 2026-11-14 | Soft memory limit at 3.2 GB with graceful degradation | Hard crash on 4 GB OOM | Prevents unrecoverable kernel OOM kills in 4 GB RAM container | Yes |
 | 2026-11-14 | 240s deadline wrap-up budget | Run until timeout cut-off | Ensures required done frame and final deliverables are always emitted | Yes |
 | 2026-11-14 | Remove all timestamps from artifact json files | Raw timestamps | Guarantees 100% byte-identical artifact reproducibility (S10) | Yes |
+| 2026-11-14 | Differentiate Peak vs Target Model in headline | Single blended metric | Eliminates ambiguity between highest score and submission model | No |
+| 2026-11-14 | Add 95% CI error bars to Fig 2 and reframe Pareto | Point estimates only | Statistically defends Flash cost dominance despite mid-tier CI overlap | Yes |
+| 2026-11-14 | Expand Fig 3 to all S1–S12 failure modes | Top 10 classes | Visualizes complete 12-class taxonomy; clarifies 103 intercepted events | Yes |
+| 2026-11-14 | Compute Dev-to-Hidden distribution reweight | Unweighted dev score | Accounts for Stage 2 Mechanical shift (24%->41%); confirms >0.138 margin | Yes |

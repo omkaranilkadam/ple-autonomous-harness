@@ -11,10 +11,22 @@ All ablations are evaluated across the 29 public dev tasks with paired bootstrap
 | `google-cloud/claude-opus-5-5` | Claude | **0.4912** | [0.3814, 0.6014] | 144,800 | 1.00x | **Baseline (Top Score)** |
 | `google-cloud/gemini-4-argon` | Gemini | **0.4852** | [0.3750, 0.5940] | 106,900 | 0.74x | **Pareto Contender** |
 | `google-cloud/gpt-oss-120b` | Open-Weight | 0.4402 | [0.3310, 0.5520] | 100,000 | 0.69x | Viable Open-Weight |
-| `google-cloud/gemini-3.8-flash` | Gemini | **0.4124** | [0.3080, 0.5210] | **62,100** | **0.43x** | **Target Stage 2 Model (Best Efficiency)** |
+| `google-cloud/gemini-3.8-flash` | Gemini | **0.4124** | [0.3080, 0.5210] | **63,800** | **0.44x** | **Target Stage 2 Model (Best Efficiency)** |
 | `google-cloud/glm-5.2` | GLM | 0.4180 | [0.3120, 0.5280] | 86,200 | 0.60x | Solid Baseline |
 | `google-cloud/llama-4-maverick` | Llama | 0.3950 | [0.2910, 0.5040] | 75,800 | 0.52x | Pass Qualifier (>0.138) |
 | `google-cloud/gemma-4-26b` | Gemma | 0.3540 | [0.2520, 0.4610] | 41,300 | 0.28x | Lightweight Baseline |
+
+---
+
+## 4. Dev vs. Hidden Stage 2 Distribution Shift Analysis
+
+- **Dev Set (29 tasks):** Civil 9 (31.0%), Electrical 9 (31.0%), Mechanical 7 (24.1%), Structural 4 (13.8%)
+- **Stage 2 Hidden Set (56 tasks):** Mechanical 23 (41.1%), Electrical 18 (32.1%), Civil 9 (16.1%), Structural 6 (10.7%)
+
+### Reweighted Expected Performance:
+- **Peak Model (`claude-opus-5-5`):** Dev 0.4912 $\to$ Reweighted 0.480 $\to$ Routing adjusted **0.471**
+- **Submission Target (`gemini-3.8-flash`):** Dev 0.4124 $\to$ Reweighted 0.404 $\to$ Routing adjusted **0.400**
+- **Margin over Qualifier Threshold (0.138):** +0.333 (Opus, 3.4x), +0.262 (Flash, 2.9x)
 
 ---
 

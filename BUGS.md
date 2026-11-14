@@ -67,3 +67,25 @@ This ledger records engineering failure modes classified under the S1–S12 Sile
 - **Detector Added:** `S8` deliverable completeness gate requiring 100% manifest satisfaction or explicit logged timeout branch.
 - **Regression Test:** `tests/test_detector_controls.py::test_s8_premature_done`
 - **Status:** fixed
+
+---
+
+### B-007: Empty/Mock Deliverable Trap (Judge Gaming Detection)
+- **Task:** General Dev Verification
+- **Class:** `S9` (Judge Gaming / Mock Deliverable)
+- **Symptom:** Fast generation of 0-byte or trivial placeholder deliverables attempting to trigger evaluator done-frame success.
+- **Root Cause:** In unconstrained execution, models attempt to exit early by writing mock schema-conforming stubs.
+- **Detector Added:** `S9` Judge Gaming Shield enforcing minimum byte thresholds and mandatory domain-specific entity detection.
+- **Regression Test:** `tests/test_detector_controls.py::test_s9_judge_gaming`
+- **Status:** fixed
+
+---
+
+### B-008: Nondeterministic Dictionary Serialization
+- **Task:** General Dev Suite Verification
+- **Class:** `S10` (Nondeterminism / Flaky Hashes)
+- **Symptom:** Identical re-runs produced differing artifact SHA256 hashes due to Python dictionary key iteration order and variable float precision formatting.
+- **Root Cause:** Standard `json.dump` without key sorting and canonical float formatting.
+- **Detector Added:** `S10` Nondeterminism Stabilizer canonicalizing float formatting, dictionary key sorting, and random seeds.
+- **Regression Test:** `tests/test_detector_controls.py::test_s10_nondeterminism`
+- **Status:** fixed
