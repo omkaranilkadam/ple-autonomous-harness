@@ -38,10 +38,10 @@
 - **Repository:** https://github.com/omkaranilkadam/ple-autonomous-harness
 - **Submission Target Baseline Dev Score:** **0.4852** (95% CI: [0.3750, 0.5940])
 - **Submission Target Measured Dev Score:** **0.8110** (Hardened Frontier, 95% CI: [0.7752, 0.8481])
-- **Realistic Stage-2 Hidden Estimate:** **0.68–0.80 (central: 0.73)** vs 0.1380 qualifier threshold (+0.5920 margin, **5.29x** qualifier; reweighted dev baseline = 0.8083)
+- **Realistic Stage-2 Hidden Estimate:** **0.68–0.80 (central: 0.71)** vs 0.1380 qualifier threshold (+0.5720 margin, **5.14x** qualifier; reweighted dev baseline = 0.8083)
 - **Effective Compute Cost:** ~155,000 tokens/task on `google-cloud/gemini-4-argon`
 - **Verified Dev Tasks:** 29 / 29 (100% verified under G1–G6 Truth Gate)
 - **Artifact File Count:** 101 files (≤ 10,000 limit)
 - **Artifact Directory Size:** 25.37 MiB (≤ 512 MiB limit)
-- **Git Commit SHA:** `643e1ee4005f62058148119d9e9c851ca813851f`
+- **Git Commit SHA:** `b24d64e74106cef7215e28849da661fbb75ffa72`
 - **Release Tag:** `v1.0-submission`
