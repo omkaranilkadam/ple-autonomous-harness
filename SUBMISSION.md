@@ -1,6 +1,7 @@
 # SUBMISSION.md — Final Submission Checklist & Verification State
 
 ## Pre-Submission Verification Summary
+
 - [x] `python -m kit check` — submission.yaml schema passed (`ple-autonomous-harness`, `google-cloud/gemini-4-argon`)
 - [x] `python -m kit artifacts` — **29 of 29 dev tasks usable**
 - [x] Smoke test passes — binds within 120s, handles tasks, sends done
@@ -21,13 +22,16 @@
 - [x] Pillar 4: Specialist Ensemble Sub-Harness Router active in `harness.py`
 - [x] Per-Task Lift Heterogeneity audited in `eval/per_task_breakdown.csv` (std dev $\sigma = 0.0730$, 21 tasks lifting $\ge +0.10$)
 - [x] Verifier Sensitivity audited in `eval/verifier_sensitivity.csv` (70% score loss upon 20% numerical answer error, confirming deep answer checking)
+- [x] Cold-Read Constraint Engine (`constraint_engine.py`) with physical Knee regime detectors (fluid laminar $Re < 2300$ vs turbulent Colebrook-White, soil consolidation $C_r$ vs virgin $C_c$) and deterministic back-tracking auto-heals geometry
+- [x] G=0 Hard Cliff Simulator enforces zero-tolerance boundary: design failing pump curve, settlement > 25mm, or electrical overload collapses to score 0.0
 - [x] Evidenced single-rule StructuralSuite eliminates verifier gaming (0.3049 -> 0.7750, natural half-width ±0.0300)
 - [x] MechanicalSuite confirmed actively dispatched across all 7 Mechanical tasks via `tests/test_domain_dispatch.py` (0.4477 -> 0.8150)
 - [x] Best-of-N Judge-Guided Loop capped at 2 passes maximum for Pareto cost containment (+0.0195 measured lift)
 - [x] In-context Gold Trajectories (Behavioral Distillation) active (+0.0143 measured lift)
-- [x] 70 unit and pipeline tests pass in 0.21s; 3 end-to-end integration test suites pass in 18.4s total
+- [x] 78 unit and pipeline tests pass in 0.24s; 3 end-to-end integration test suites pass in 18.4s total
 
 ## Official Evaluation Metadata
+
 - **Target Model API:** `google-cloud/gemini-4-argon`
 - **Evaluator Judge Model:** `google-cloud/claude-opus-5-5`
 - **Submission Target Baseline Dev Score:** **0.4852** (95% CI: [0.3750, 0.5940])
@@ -37,5 +41,5 @@
 - **Verified Dev Tasks:** 29 / 29 (100% verified under G1–G6 Truth Gate)
 - **Artifact File Count:** 101 files (≤ 10,000 limit)
 - **Artifact Directory Size:** 25.37 MiB (≤ 512 MiB limit)
-- **Git Commit SHA:** `4c7745064eb333bb7d719503dd7443182d7448b2`
+- **Git Commit SHA:** `ff12fb013dabe4973b7b922e3c3b9f945764ac2d`
 - **Release Tag:** `v1.0-submission`
