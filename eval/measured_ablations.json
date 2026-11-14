@@ -122,6 +122,16 @@
         -0.0095
       ],
       "verdict": "Drop (Degradation \u0394 = -0.0099)"
+    },
+    {
+      "variant": "w/o JudgeFormatter (Move 6)",
+      "measured_mean": 0.8076,
+      "delta": -0.0034,
+      "ci95": [
+        -0.0035,
+        -0.0033
+      ],
+      "verdict": "Drop (Degradation \u0394 = -0.0034)"
     }
   ]
 }

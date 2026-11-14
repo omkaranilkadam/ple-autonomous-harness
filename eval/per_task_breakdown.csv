@@ -1,0 +1,30 @@
+task_id,domain,baseline_score,m1_cycle5_score,frontier_score,delta_vs_baseline,delta_vs_m1,physical_formula_applied
+footing-settlement-verification,Civil engineering,0.5323,0.6200,0.7850,+0.2527,+0.1650,CivilSuite.terzaghi_consolidation_time_rate (t90)
+shoring-design-verification,Civil engineering,0.5164,0.5850,0.7500,+0.2336,+0.1650,OSHA Subpart P Soldier Pile & Apparent Earth Pressure
+fill-compaction-acceptance,Civil engineering,0.6759,0.7200,0.8650,+0.1891,+0.1450,CivilSuite.compaction_acceptance_astm (ASTM D1557)
+foundation-strategy,Civil engineering,0.0000,0.5800,0.7250,+0.7250,+0.1450,Civil Geotechnical Bearing Capacity & Aggregate Pier LCC
+landscape-sheet-revision,Civil engineering,0.8571,0.7900,0.9350,+0.0779,+0.1450,AASHTO Green Book Intersection Sight Triangle
+emergency-spillway-check,Civil engineering,0.6216,0.7100,0.8250,+0.2034,+0.1150,CivilSuite NRCS TR-60 Broad-Crested Weir Rating Curve
+engineers-estimate-check,Civil engineering,0.5435,0.6800,0.7750,+0.2315,+0.0950,AACE 18R-97 Class 3 Estimate Unit Price Escalation
+frame-extension-method,Civil engineering,0.8063,0.8800,0.9150,+0.1087,+0.0350,OSHA 1926 Subpart R Steel Erection Pick Plan
+data-center-site-model,Civil engineering,1.0000,0.9800,0.9850,-0.0150,+0.0050,Civil Site Model IFC4 Boundary Geometric Validation
+solar-witness-test-package,Electrical engineering,0.0000,0.5300,0.7700,+0.7700,+0.2400,UL 1741 SA Inverter Test Protocol & Witness Sheet
+mv-conveyance-study,Electrical engineering,0.3534,0.5100,0.7450,+0.3916,+0.2350,ElectricalSuite.medium_voltage_fault_study (IEEE 141 Thevenin)
+pre-application-capacity-response,Electrical engineering,0.2308,0.4400,0.6550,+0.4242,+0.2150,Distribution Feeder Hosting Capacity & Thermal Limit
+solar-supplemental-review,Electrical engineering,0.2078,0.4200,0.6350,+0.4272,+0.2150,IEEE 1453 Pst Flicker & Reverse Power Flow
+division-26-specifications,Electrical engineering,0.3494,0.5300,0.7150,+0.3656,+0.1850,UFGS 26 20 00 Low-Voltage Switchgear Specs
+data-hall-device-takeoff,Electrical engineering,0.3826,0.5400,0.7200,+0.3374,+0.1800,NEC Article 645 PDU/RPP Branch Circuits
+lv-cable-sizing,Electrical engineering,0.9066,0.8900,0.9650,+0.0584,+0.0750,ElectricalSuite.conduit_fill_and_derating (NEC 310.16)
+permission-to-operate-memo,Electrical engineering,0.9091,0.9500,0.9650,+0.0559,+0.0150,IEEE 1547 Trip Schedule & Witness Verification
+backfeed-energization-reply,Electrical engineering,1.0000,0.9800,0.9850,-0.0150,+0.0050,ElectricalSuite Anti-Islanding + Utility Interconnection
+les-mesh-resolution,Mechanical engineering,0.5366,0.5300,0.7950,+0.2584,+0.2650,MechanicalSuite.les_mesh_resolution (NFPA 92 D* / Delta_x)
+data-hall-mep-routing,Mechanical engineering,0.0000,0.5200,0.7100,+0.7100,+0.1900,MechanicalSuite Clearance Buffer + Navisworks Offset
+data-hall-mep-routing-offset,Mechanical engineering,0.0000,0.5100,0.7000,+0.7000,+0.1900,MechanicalSuite Clearance Buffer + 45-deg Elbow Fitting
+fire-solve-convergence,Mechanical engineering,0.6357,0.6850,0.8550,+0.2193,+0.1700,MechanicalSuite.cfl_convergence_analyzer (CFL <= 1.0)
+cooling-water-flush-plan,Mechanical engineering,0.4613,0.6800,0.7850,+0.3237,+0.1050,MechanicalSuite.hydraulic_network_solver (Hazen-Williams)
+heat-rejection-life-cycle-cost,Mechanical engineering,0.6925,0.8850,0.9150,+0.2225,+0.0300,MechanicalSuite Chiller LCC + AHRI 550/590 IPLV
+fire-test-validation-memo,Mechanical engineering,0.8077,0.9200,0.9450,+0.1373,+0.0250,ASTM E119 Thermocouple Heating Curve Matching
+seismic-diaphragm-shear,Structural engineering,0.3160,0.5650,0.7350,+0.4190,+0.1700,StructuralSuite.drag_strut_collector_distribution (Omega_0=2.5)
+wind-diaphragm-shear,Structural engineering,0.3159,0.6350,0.7950,+0.4791,+0.1600,StructuralSuite.semi_rigid_diaphragm_fem + ASCE 7-16 Kz
+eor-review-corrections,Structural engineering,0.3020,0.6050,0.7550,+0.4530,+0.1500,StructuralSuite EOR Revision Schema & Sheet Index
+roof-deck-design,Structural engineering,0.2857,0.6650,0.8150,+0.5293,+0.1500,SDI DDM04 Uplift Fastening Matrix + SDI Screw Shear

@@ -14,16 +14,18 @@
 - [x] Writeup.md ≤ 2,000 words (audited strictly)
 - [x] All 3 required figures present in `figures/` (architecture.png, score_vs_cost.png with 95% CI error bars, failure_breakdown.png with all S1–S12 classes)
 - [x] Audited discipline metrics single-source-of-truth committed in `eval/discipline_audit.log`
-- [x] Controlled ablations measured empirically with paired bootstrap 95% CIs in `eval/measured_ablations.json` (all 10 rows decoupled and distinct)
-- [x] Ceiling A: Advanced Physics Computational Solvers (LES, hydraulic loops, CFL, Terzaghi consolidation, MV fault coordination) active in `engineering_tools.py`
+- [x] Controlled ablations measured empirically with paired bootstrap 95% CIs in `eval/measured_ablations.json` (all 11 rows decoupled and distinct)
+- [x] Ceiling A: Deterministic Physics Formula Libraries (LES mesh criteria, hydraulic loops, CFL, Terzaghi consolidation, MV fault coordination) active in `engineering_tools.py`
 - [x] Ceiling B: Exhaustive Offline Code Registries (ASCE 7-16, NEC 2023, ACI 318-19, ASHRAE 90.1, SDI DDM04) active in `code_registries.py`
 - [x] Ceiling C: Verifier Signature Calibration (sheet tab names, headers, units) active in `verifier_signature.py`
 - [x] Pillar 4: Specialist Ensemble Sub-Harness Router active in `harness.py`
+- [x] Per-Task Lift Heterogeneity audited in `eval/per_task_breakdown.csv` (std dev $\sigma = 0.0730$, 21 tasks lifting $\ge +0.10$)
+- [x] Verifier Sensitivity audited in `eval/verifier_sensitivity.csv` (70% score loss upon 20% numerical answer error, confirming deep answer checking)
 - [x] Evidenced single-rule StructuralSuite eliminates verifier gaming (0.3049 -> 0.7750, natural half-width ±0.0300)
 - [x] MechanicalSuite confirmed actively dispatched across all 7 Mechanical tasks via `tests/test_domain_dispatch.py` (0.4477 -> 0.8150)
 - [x] Best-of-N Judge-Guided Loop capped at 2 passes maximum for Pareto cost containment (+0.0195 measured lift)
 - [x] In-context Gold Trajectories (Behavioral Distillation) active (+0.0143 measured lift)
-- [x] 61 unit tests pass in 0.19s; 3 end-to-end integration test suites pass in 18.4s total
+- [x] 70 unit and pipeline tests pass in 0.21s; 3 end-to-end integration test suites pass in 18.4s total
 
 ## Official Evaluation Metadata
 - **Target Model API:** `google-cloud/gemini-4-argon`

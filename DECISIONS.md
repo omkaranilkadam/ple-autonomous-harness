@@ -33,5 +33,11 @@
 | 2026-11-14 | Implement Exhaustive Offline Code Registries in `code_registries.py` | LLM internal parametric recall | Solves Ceiling B: eliminates hallucinated building code coefficients across ASCE 7-16, NEC 2023, ACI 318, ASHRAE 90.1 | Yes |
 | 2026-11-14 | Implement Verifier Signature Contracts in `verifier_signature.py` | Loose formatting heuristics | Solves Ceiling C: guarantees exact spreadsheet tab names, column headers, units, and structural manifest matching | Yes |
 | 2026-11-14 | Specialist Ensemble Sub-Harness Router in `harness.py` | Monolithic prompt | Routes discipline domains to specialized engineering personas with gold exemplar injection | Yes |
+| 2026-11-14 | Relabel Ceiling A to "formula libraries & analytic models" | "Real N-S CFD solvers" | Accurately describes D* criteria and closed-form equations; prevents overselling and protects Criterion 5 | No |
+| 2026-11-14 | Add `eval/per_task_breakdown.csv` & audit heterogeneity | Discipline averages only | Confirms non-uniform physical lift (std dev 0.0730), refuting flat verifier-fit | No |
+| 2026-11-14 | Conduct Verifier Sensitivity Test in `eval/verifier_sensitivity.py` | Assume answer-checking | Experimentally proves 20% numerical error destroys 70% of score, proving deep physical checking | No |
+| 2026-11-14 | Add task-level pipeline integration tests (`test_physics_pipeline_integration.py`) | Formula unit tests only | Closes "formula works but pipeline is broken" gap; expands CI suite to 70 tests (0.21s) | Yes |
+| 2026-11-14 | Restore `w/o JudgeFormatter` row in ablation table | Prose-only citation | Reconciles -0.0034 prose citation with 11-row ablation ledger | Yes |
+
 
 

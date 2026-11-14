@@ -335,8 +335,14 @@ def dispatch_domain_tools(ctx: TaskContext, domain: str, instruction: str) -> Li
     from engineering_tools import MechanicalSuite, DualCalloutParser, CodeClauseVerifier, DimensionalEngine
     results = []
     inst_lower = (instruction + " " + ctx.task_id).lower()
+    d_lower = domain.lower()
 
-    if "mechanical" in domain.lower() or any(k in inst_lower for k in ["hvac", "mep", "cooling", "pipe", "duct", "chiller", "flush", "fire"]):
+    is_mech = "mechanical" in d_lower or (not any(x in d_lower for x in ["structural", "civil", "electrical"]) and any(re.search(r'\b' + re.escape(k) + r'\b', inst_lower) for k in ["hvac", "mep", "cooling", "pipe", "duct", "chiller", "flush", "fire"]))
+    is_struct = "structural" in d_lower or (not any(x in d_lower for x in ["mechanical", "civil", "electrical"]) and any(re.search(r'\b' + re.escape(k) + r'\b', inst_lower) for k in ["shear", "diaphragm", "deck", "rebar", "wall", "beam", "frame", "eor", "revision"]))
+    is_civil = "civil" in d_lower or (not any(x in d_lower for x in ["mechanical", "structural", "electrical"]) and any(re.search(r'\b' + re.escape(k) + r'\b', inst_lower) for k in ["soil", "footing", "settlement", "bearing", "geotech", "spillway", "fill", "compaction", "drainage"]))
+    is_elec = "electrical" in d_lower or (not any(x in d_lower for x in ["mechanical", "structural", "civil"]) and any(re.search(r'\b' + re.escape(k) + r'\b', inst_lower) for k in ["feeder", "cable", "voltage", "conveyance", "switchgear", "panel", "nec", "xfmr", "transformer", "energization", "takeoff"]))
+
+    if is_mech:
         # 1. Pipe Sizing
         if any(k in inst_lower for k in ["pipe", "flush", "water", "hydronic", "pcw", "mep"]):
             pipe_res = MechanicalSuite.pipe_sizing(flow_gpm=180.0, friction_loss_limit_ft_per_100ft=4.0, max_velocity_fps=8.0)
@@ -393,7 +399,7 @@ def dispatch_domain_tools(ctx: TaskContext, domain: str, instruction: str) -> Li
             ctx.tool_calls += 1
             results.append({"tool": "MechanicalSuite.cfl_convergence_analyzer", "output": cfl_res})
 
-    elif "structural" in domain.lower() or any(k in inst_lower for k in ["shear", "diaphragm", "deck", "rebar", "wall", "beam", "frame", "eor", "revision"]):
+    elif is_struct:
         from engineering_tools import StructuralSuite
         # 1. Dual Callout Parser
         callout_res = DualCalloutParser.parse_primary("4-#8 @ 12\" o.c.")
@@ -455,7 +461,7 @@ def dispatch_domain_tools(ctx: TaskContext, domain: str, instruction: str) -> Li
             ctx.tool_calls += 1
             results.append({"tool": "StructuralSuite.drag_strut_collector_distribution", "output": strut_res})
 
-    elif "civil" in domain.lower() or any(k in inst_lower for k in ["soil", "footing", "settlement", "bearing", "geotech", "spillway", "fill", "compaction", "drainage"]):
+    elif is_civil:
         from engineering_tools import CivilSuite
         settle_res = CivilSuite.consolidation_settlement(clay_thickness_ft=10.0, compression_index_cc=0.35, initial_void_ratio_e0=0.85)
         ctx.working_memory.append({"key": "consolidation_settlement", "val": settle_res, "tool": "CivilSuite.consolidation_settlement"})
@@ -481,7 +487,7 @@ def dispatch_domain_tools(ctx: TaskContext, domain: str, instruction: str) -> Li
             ctx.tool_calls += 1
             results.append({"tool": "CivilSuite.compaction_acceptance_astm", "output": comp_res})
 
-    elif "electrical" in domain.lower() or any(k in inst_lower for k in ["feeder", "cable", "voltage", "conveyance", "switchgear", "panel", "nec", "xfmr", "transformer", "energization", "takeoff"]):
+    elif is_elec:
         from engineering_tools import ElectricalSuite
         vd_res = ElectricalSuite.feeder_voltage_drop(current_amps=250.0, length_ft=350.0, system_voltage_v=480.0)
         ctx.working_memory.append({"key": "feeder_voltage_drop", "val": vd_res, "tool": "ElectricalSuite.feeder_voltage_drop"})

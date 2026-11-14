@@ -212,4 +212,16 @@ This ledger records engineering failure modes classified under the S1–S12 Sile
 - **Regression Test:** `tests/test_verifier_signature.py` (6 tests passed in 0.03s)
 - **Status:** fixed
 
+---
+
+### B-020: Substring Keyword False Positive in Tool Dispatcher (`duct` in `conduct`)
+- **Task:** `mv-conveyance-study` and multidisciplinary tasks
+- **Class:** `S6` (Tool Misdirection & Swallowed Dispatch Error)
+- **Symptom:** Electrical tasks with phrases like "Conduct medium voltage study" inadvertently triggered the Mechanical suite due to substring matching on `"duct"`.
+- **Root Cause:** Keyword matching used naive `k in inst_lower` without regex word boundaries (`\b`) or prioritizing explicit `domain` parameter.
+- **Fix:** Refactored `dispatch_domain_tools` in `harness.py` to check explicit `domain.lower()` first, and enforce word boundaries (`\b...\b`) on fallback keyword searches.
+- **Regression Test:** `tests/test_physics_pipeline_integration.py::test_pipeline_medium_voltage_fault_study`
+- **Status:** fixed
+
+
 

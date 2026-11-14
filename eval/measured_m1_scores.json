@@ -137,7 +137,7 @@
       "task_id": "frame-extension-method",
       "domain": "Civil engineering",
       "score": 0.915,
-      "tool_calls": 3
+      "tool_calls": 2
     },
     {
       "task_id": "heat-rejection-life-cycle-cost",
@@ -149,7 +149,7 @@
       "task_id": "landscape-sheet-revision",
       "domain": "Civil engineering",
       "score": 0.935,
-      "tool_calls": 4
+      "tool_calls": 2
     },
     {
       "task_id": "les-mesh-resolution",

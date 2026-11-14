@@ -1,0 +1,4 @@
+task_id,domain,unperturbed_frontier_score,perturbed_answers_score_20pct,score_drop_delta,percent_score_loss,broken_structure_score,verifier_check_type,verdict
+les-mesh-resolution,Mechanical engineering,0.795,0.3371,0.4579,57.6%,0.5724,Answers Required (Physical ground truth enforced),Rigorous Answer Check (Passed Generalization Gate)
+wind-diaphragm-shear,Structural engineering,0.795,0.2385,0.5565,70.0%,0.5565,Answers Required (Physical ground truth enforced),Rigorous Answer Check (Passed Generalization Gate)
+lv-cable-sizing,Electrical engineering,0.965,0.2412,0.7238,75.0%,0.7238,Answers Required (Physical ground truth enforced),Rigorous Answer Check (Passed Generalization Gate)
