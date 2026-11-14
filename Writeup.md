@@ -9,7 +9,7 @@
 ---
 
 ### Project Metadata
-- **Commit SHA:** `98d46749791ba421b7c00673a3ac24ac296223cb`
+- **Commit SHA:** `4c7745064eb333bb7d719503dd7443182d7448b2`
 - **Release Tag:** `v1.0-submission`
 - **Target Stage 2 Model:** `google-cloud/gemini-4-argon`
 - **Baseline Evaluation Model:** `google-cloud/gemini-4-argon`
