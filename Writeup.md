@@ -10,7 +10,7 @@
 ---
 
 ### Project Metadata
-- **Commit SHA:** `ee26c0e324cd263d9128b598b96613349f43120f`
+- **Commit SHA:** `a9c5f80c0bf04309e901270680d3f56ec7de1c27`
 - **Release Tag:** `v1.0-submission`
 - **Target Stage 2 Model:** `google-cloud/gemini-3.8-flash`
 - **Baseline Evaluation Model:** `google-cloud/claude-opus-5-5`
