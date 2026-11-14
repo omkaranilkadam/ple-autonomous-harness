@@ -137,3 +137,64 @@ def test_pipeline_conduit_fill_and_derating():
     assert data is not None
     assert data["status"] == "PASS"
     assert data["actual_conduit_fill_pct"] <= data["max_allowable_fill_pct"]
+
+def test_pipeline_psychrometric_state():
+    """Validates end-to-end pipeline for data-hall CRAC cooling psychrometrics."""
+    ctx = TaskContext(
+        task_id="data-hall-mep-routing",
+        instruction="Analyze psychrometric state points, humidity ratio, and coil dew point for data hall cooling."
+    )
+    tools = dispatch_domain_tools(ctx, "Mechanical engineering", ctx.instruction)
+    data = get_memory_val(ctx, "psychrometric_state_res")
+    assert data is not None
+    assert data["status"] == "PASS"
+    assert data["dew_point_c"] > 0
+
+def test_pipeline_pump_npsh():
+    """Validates end-to-end pipeline for cooling water pump suction cavitation."""
+    ctx = TaskContext(
+        task_id="cooling-water-flush-plan",
+        instruction="Check pump suction head, NPSHa, and cavitation margin for primary chilled water loop."
+    )
+    tools = dispatch_domain_tools(ctx, "Mechanical engineering", ctx.instruction)
+    data = get_memory_val(ctx, "pump_npsh_res")
+    assert data is not None
+    assert data["is_cavitation_free"] is True
+    assert data["cavitation_margin_ft"] > 0
+
+def test_pipeline_terzaghi_bearing():
+    """Validates end-to-end pipeline for foundation bearing capacity."""
+    ctx = TaskContext(
+        task_id="foundation-strategy",
+        instruction="Compute allowable bearing capacity and Terzaghi Meyerhof factors for shallow footing."
+    )
+    tools = dispatch_domain_tools(ctx, "Civil engineering", ctx.instruction)
+    data = get_memory_val(ctx, "terzaghi_bearing_res")
+    assert data is not None
+    assert data["status"] == "PASS"
+    assert data["q_all_ksf"] > 1.0
+
+def test_pipeline_arc_flash():
+    """Validates end-to-end pipeline for substation arc flash incident energy."""
+    ctx = TaskContext(
+        task_id="division-26-specifications",
+        instruction="Evaluate arc flash incident energy and NFPA 70E PPE category for 480V switchboard."
+    )
+    tools = dispatch_domain_tools(ctx, "Electrical engineering", ctx.instruction)
+    data = get_memory_val(ctx, "arc_flash_res")
+    assert data is not None
+    assert data["status"] == "PASS"
+    assert data["incident_energy_cal_cm2"] > 0
+
+def test_pipeline_k_factor():
+    """Validates end-to-end pipeline for data center harmonic K-factor rating."""
+    ctx = TaskContext(
+        task_id="solar-supplemental-review",
+        instruction="Calculate K-factor transformer derating for non-linear server UPS harmonic loads."
+    )
+    tools = dispatch_domain_tools(ctx, "Electrical engineering", ctx.instruction)
+    data = get_memory_val(ctx, "k_factor_res")
+    assert data is not None
+    assert data["status"] == "PASS"
+    assert "K-" in data["recommended_standard_k_rating"]
+

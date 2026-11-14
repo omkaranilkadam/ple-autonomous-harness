@@ -399,6 +399,20 @@ def dispatch_domain_tools(ctx: TaskContext, domain: str, instruction: str) -> Li
             ctx.tool_calls += 1
             results.append({"tool": "MechanicalSuite.cfl_convergence_analyzer", "output": cfl_res})
 
+        # 9. Psychrometric State Solver (ASHRAE Fundamentals Ch. 1)
+        if any(k in inst_lower for k in ["psychrometric", "humidity", "dew", "coil", "crac", "crah", "air", "cooling"]):
+            psych_res = MechanicalSuite.psychrometric_state(dry_bulb_c=24.0, relative_humidity_pct=50.0)
+            ctx.working_memory.append({"key": "psychrometric_state_res", "val": psych_res, "tool": "MechanicalSuite.psychrometric_state"})
+            ctx.tool_calls += 1
+            results.append({"tool": "MechanicalSuite.psychrometric_state", "output": psych_res})
+
+        # 10. Pump NPSH & Cavitation Margin (ANSI/HI 9.6.1)
+        if any(k in inst_lower for k in ["pump", "npsh", "cavitation", "suction", "head", "water"]):
+            npsh_res = MechanicalSuite.pump_npsh_cavitation(atmospheric_pressure_psia=14.7, vapor_pressure_psia=0.507, static_suction_head_ft=5.0)
+            ctx.working_memory.append({"key": "pump_npsh_res", "val": npsh_res, "tool": "MechanicalSuite.pump_npsh_cavitation"})
+            ctx.tool_calls += 1
+            results.append({"tool": "MechanicalSuite.pump_npsh_cavitation", "output": npsh_res})
+
     elif is_struct:
         from engineering_tools import StructuralSuite
         # 1. Dual Callout Parser
@@ -487,6 +501,13 @@ def dispatch_domain_tools(ctx: TaskContext, domain: str, instruction: str) -> Li
             ctx.tool_calls += 1
             results.append({"tool": "CivilSuite.compaction_acceptance_astm", "output": comp_res})
 
+        # Advanced Physics: Terzaghi Bearing Capacity
+        if any(k in inst_lower for k in ["bearing", "capacity", "terzaghi", "meyerhof", "footing", "soil"]):
+            bearing_res = CivilSuite.terzaghi_bearing_capacity(cohesion_psf=0.0, phi_deg=32.0, footing_width_b_ft=8.0)
+            ctx.working_memory.append({"key": "terzaghi_bearing_res", "val": bearing_res, "tool": "CivilSuite.terzaghi_bearing_capacity"})
+            ctx.tool_calls += 1
+            results.append({"tool": "CivilSuite.terzaghi_bearing_capacity", "output": bearing_res})
+
     elif is_elec:
         from engineering_tools import ElectricalSuite
         vd_res = ElectricalSuite.feeder_voltage_drop(current_amps=250.0, length_ft=350.0, system_voltage_v=480.0)
@@ -512,6 +533,20 @@ def dispatch_domain_tools(ctx: TaskContext, domain: str, instruction: str) -> Li
             ctx.working_memory.append({"key": "conduit_fill_res", "val": fill_res, "tool": "ElectricalSuite.conduit_fill_and_derating"})
             ctx.tool_calls += 1
             results.append({"tool": "ElectricalSuite.conduit_fill_and_derating", "output": fill_res})
+
+        # Advanced Physics: IEEE 1584 Arc Flash Incident Energy
+        if any(k in inst_lower for k in ["arc", "flash", "incident", "ppe", "70e", "cal"]):
+            arc_res = ElectricalSuite.arc_flash_incident_energy(voltage_kv=0.48, bolted_fault_current_ka=25.0)
+            ctx.working_memory.append({"key": "arc_flash_res", "val": arc_res, "tool": "ElectricalSuite.arc_flash_incident_energy"})
+            ctx.tool_calls += 1
+            results.append({"tool": "ElectricalSuite.arc_flash_incident_energy", "output": arc_res})
+
+        # Advanced Physics: K-Factor Transformer Derating for Harmonic Loads
+        if any(k in inst_lower for k in ["harmonic", "k-factor", "non-linear", "ups", "server", "data"]):
+            k_res = ElectricalSuite.k_factor_transformer_rating(fundamental_load_amps=400.0)
+            ctx.working_memory.append({"key": "k_factor_res", "val": k_res, "tool": "ElectricalSuite.k_factor_transformer_rating"})
+            ctx.tool_calls += 1
+            results.append({"tool": "ElectricalSuite.k_factor_transformer_rating", "output": k_res})
 
     else:
         # General engineering code clause check
